@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#FFF4DC"><title>Red Flag or Green Flag? – Clueless</title><meta name="description" content="Swipe dating, friendship and work situations: red flag or green flag? See how India voted and get your flag personality."><meta property="og:title" content="Red Flag 🚩 or Green Flag 💚?"><meta property="og:description" content="Swipe 12 situations. See how everyone else voted. Find out what kind of flag you are."><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23FFF4DC%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-size=%2738%27 text-anchor=%27middle%27%3E%F0%9F%9A%A9%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="shared.css">
+<style>
+.rf{max-width:440px;margin:0 auto}
+.rf .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:800;font-size:14px}
+.rf .bar{flex:1;height:8px;border-radius:4px;background:#1B163614;margin:0 12px;overflow:hidden;border:2px solid var(--ink)}.rf .bar b{display:block;height:100%;background:var(--acc);transition:width .4s}
+.deck{position:relative;height:min(62vh,460px);margin-bottom:18px}
+.sw{position:absolute;inset:0;border:3px solid var(--ink);border-radius:28px;background:#fff;box-shadow:8px 8px 0 var(--ink);padding:28px 24px;display:flex;flex-direction:column;justify-content:center;text-align:center;touch-action:none;user-select:none;cursor:grab;transition:transform .35s cubic-bezier(.3,1.3,.5,1),box-shadow .2s}
+.sw.drag{transition:none;cursor:grabbing}
+.sw.ghost{transform:scale(.93) translateY(18px) rotate(-3deg);background:var(--panel2);z-index:0;pointer-events:none}
+.sw .cat{position:absolute;top:20px;left:0;right:0;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.sw .q{font:800 clamp(24px,6.8vw,32px)/1.15 Syne,Manrope,sans-serif;letter-spacing:-.5px}
+.sw .st{position:absolute;top:56px;font:800 30px Syne,sans-serif;padding:4px 14px;border:4px solid;border-radius:12px;opacity:0;transition:opacity .1s}
+.sw .st.r{right:20px;color:var(--bad);transform:rotate(12deg)}.sw .st.g{left:20px;color:var(--ok);transform:rotate(-12deg)}
+.sw .hint{position:absolute;bottom:18px;left:0;right:0;font-size:13px;color:var(--mute)}
+.vote{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vote button{padding:18px;border-radius:20px;border:3px solid var(--ink);font:800 20px Manrope,sans-serif;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.vote button:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.vote .r{background:#FF6B7F;color:#fff}.vote .g{background:#3DDC97}
+.res{position:absolute;inset:0;border-radius:28px;border:3px solid var(--ink);background:#fff;box-shadow:8px 8px 0 var(--ink);padding:26px 22px;display:flex;flex-direction:column;justify-content:center;animation:pop .45s cubic-bezier(.3,1.5,.5,1)}
+.res h3{font:800 26px Syne,sans-serif;margin-bottom:16px;text-align:center}
+.split2{display:flex;height:56px;border:3px solid var(--ink);border-radius:16px;overflow:hidden;font-weight:800}
+.split2 span{display:flex;align-items:center;justify-content:center;transition:flex 1s cubic-bezier(.2,.9,.2,1);white-space:nowrap;overflow:hidden;flex:1}
+.split2 .r{background:#FF6B7F;color:#fff}.split2 .g{background:#3DDC97}
+.res p{text-align:center;margin-top:14px;color:var(--mute)}
+.res .btn{margin-top:18px}
+.prof{text-align:center}.prof .big{font-size:84px;animation:bob 2s ease-in-out infinite}
+.prof h2{font:800 34px/1.05 Syne,sans-serif;margin:6px 0 10px}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:18px 0}
+.stats div{border:2px solid var(--ink);border-radius:16px;padding:12px 6px;background:#fff}.stats b{display:block;font:800 26px Syne,sans-serif}.stats small{font-size:12px;color:var(--mute)}
+.packs{display:grid;gap:10px;margin:16px 0}
+.pk{display:flex;align-items:center;gap:14px;padding:16px;border:3px solid var(--ink);border-radius:20px;background:#fff;box-shadow:4px 4px 0 var(--ink);cursor:pointer;text-align:left;font:inherit;transition:transform .15s}
+.pk:hover{transform:translate(-2px,-2px)}.pk i{font-style:normal;font-size:30px}.pk b{display:block;font-size:17px}.pk small{color:var(--mute)}
+</style></head><body class="site"><div id="nav"></div><main class="wrap"><div class="rf" id="app"></div></main><footer id="ft"></footer><script src="shared.js"></script>
+<script type="module">
+let FB=null;const fb=()=>FB||(FB=import("./fb.js"));fb().catch(()=>{});
+// Each item: [id, category, text]. Keep ids unique and never reuse them (votes are stored by id).
+const Q=[
+["d1","Dating","Replies “k” after you sent a paragraph"],["d2","Dating","Still follows their ex on Insta"],["d3","Dating","Plans the date AND books the table"],["d4","Dating","Shares their location without you asking"],["d5","Dating","Says “I’m not like other guys/girls”"],["d6","Dating","Remembers your chai order"],["d7","Dating","Asks for your Netflix password on date 2"],["d8","Dating","Introduces you to their friends in week 1"],["d9","Dating","Has zero photos with friends"],["d10","Dating","Sends you memes at 3 AM"],["d11","Dating","Calls their mom every single day"],["d12","Dating","Splits the bill down to the rupee"],["d13","Dating","Leaves you on read but posts stories"],["d14","Dating","Texts “home safe?” after every date"],["d15","Dating","Their Spotify is 100% sad songs"],["d16","Dating","Wants to see your phone ‘just once’"],
+["f1","Friends","Screenshots your chats to the group"],["f2","Friends","Hypes you up in your selfie comments"],["f3","Friends","Only calls when they need notes"],["f4","Friends","Always ‘5 min away’ for 40 min"],["f5","Friends","Remembers your birthday without Insta"],["f6","Friends","Borrows money and says ‘UPI kar dunga’"],["f7","Friends","Tells you the outfit is not it"],["f8","Friends","Joins every plan, cancels last minute"],["f9","Friends","Sends a voice note longer than 4 minutes"],["f10","Friends","Shares food without being asked"],["f11","Friends","Watches your story but never replies"],["f12","Friends","Brings you snacks during exams"],
+["w1","Work","Boss texts on Sunday “small thing”"],["w2","Work","Manager says “we’re a family here”"],["w3","Work","Colleague cc’s your boss on everything"],["w4","Work","Team ends meetings early"],["w5","Work","Interview with 6 rounds for an intern role"],["w6","Work","Salary is ‘as per industry standards’"],["w7","Work","Boss says “take the day off, you earned it”"],["w8","Work","Unpaid ‘trial task’ that takes 3 days"],["w9","Work","Coworker takes credit for your idea"],["w10","Work","Camera-off culture is fine here"],
+["s1","Spicy","Still has their ex’s hoodie"],["s2","Spicy","Has a finsta you didn’t know about"],["s3","Spicy","Likes a random model’s pic at 2 AM"],["s4","Spicy","Is ‘best friends’ with their ex"],["s5","Spicy","Says ‘I love you’ in week two"],["s6","Spicy","Wants a no-labels situationship"],["s7","Spicy","Asks for couple matching outfits"],["s8","Spicy","Keeps your chats on mute"]];
+const PACKS=[["mix","🎲","Everything","A bit of all of it"],["d","💘","Dating","Situationships and talking stages"],["f","🫂","Friends","The group chat, exposed"],["w","💼","Work","Corporate red flags"],["s","🌶️","Spicy","The ones that start fights"]];
+const app=document.getElementById("app"),N=12;
+let deck=[],i=0,mine=[],agree=0,reds=0;
+const shuf=a=>{a=a.slice();for(let j=a.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[a[j],a[k]]=[a[k],a[j]]}return a};
+function intro(){app.innerHTML=`<h1 class="hero">Red flag or <span style="color:var(--ok)">green</span>?</h1><p class="sub">Swipe ${N} situations. See how everyone voted. Find out what kind of flag <i>you</i> are.</p><div class="packs">${PACKS.map(p=>`<button class="pk" data-p="${p[0]}"><i>${p[1]}</i><span><b>${p[2]}</b><small>${p[3]}</small></span></button>`).join("")}</div><p style="color:var(--mute);font-size:14px;text-align:center">← swipe left for 🚩 · swipe right for 💚 →</p>`;
+ app.querySelectorAll(".pk").forEach(b=>b.onclick=()=>start(b.dataset.p))}
+function start(p){const pool=p==="mix"?Q:Q.filter(q=>q[0].startsWith(p));deck=shuf(pool).slice(0,Math.min(N,pool.length));i=0;mine=[];agree=0;reds=0;card()}
+function card(){if(i>=deck.length)return done();const q=deck[i],nx=deck[i+1];
+ app.innerHTML=`<div class="meta"><span>${i+1}/${deck.length}</span><div class="bar"><b style="width:${i/deck.length*100}%"></b></div><span>🚩${reds}</span></div><div class="deck" id="dk">${nx?`<div class="sw ghost"><div class="cat">${nx[1]}</div><div class="q">${nx[2]}</div></div>`:""}<div class="sw" id="sw"><div class="cat">${q[1]}</div><span class="st g">GREEN</span><span class="st r">RED</span><div class="q">${q[2]}</div><div class="hint">drag or tap below</div></div></div><div class="vote"><button class="r" id="vr">🚩 Red flag</button><button class="g" id="vg">💚 Green flag</button></div>`;
+ const sw=document.getElementById("sw"),sr=sw.querySelector(".st.r"),sg=sw.querySelector(".st.g");let x0=null,dx=0;
+ sw.onpointerdown=e=>{x0=e.clientX;sw.classList.add("drag");sw.setPointerCapture(e.pointerId)};
+ sw.onpointermove=e=>{if(x0===null)return;dx=e.clientX-x0;sw.style.transform=`translateX(${dx}px) rotate(${dx/14}deg)`;sr.style.opacity=Math.min(1,-dx/90);sg.style.opacity=Math.min(1,dx/90)};
+ sw.onpointerup=sw.onpointercancel=()=>{if(x0===null)return;x0=null;sw.classList.remove("drag");if(Math.abs(dx)>90)vote(dx<0?"r":"g");else{sw.style.transform="";sr.style.opacity=sg.style.opacity=0}dx=0};
+ document.getElementById("vr").onclick=()=>vote("r");document.getElementById("vg").onclick=()=>vote("g")}
+async function vote(v){const q=deck[i],sw=document.getElementById("sw");if(!sw||sw.dataset.v)return;sw.dataset.v=1;
+ sw.style.transform=`translateX(${v==="r"?-140:140}%) rotate(${v==="r"?-30:30}deg)`;sw.style.opacity="0";if(navigator.vibrate)navigator.vibrate(15);
+ mine.push(v);if(v==="r")reds++;
+ let r=0,g=0;try{const {db,D}=await Promise.race([fb(),new Promise((_,x)=>setTimeout(()=>x(1),5000))]);const ref=D.ref(db,"votes/"+q[0]+"/"+v);await D.runTransaction(ref,c=>(c||0)+1);const s=(await D.get(D.ref(db,"votes/"+q[0]))).val()||{};r=s.r||0;g=s.g||0}catch(e){v==="r"?r=1:g=1}
+ const t=r+g||1,rp=Math.round(r/t*100),gp=100-rp,maj=r===g?v:(r>g?"r":"g");if(maj===v)agree++;
+ const dk=document.getElementById("dk");dk.innerHTML=`<div class="res"><h3>${maj===v?"You’re with the crowd 🤝":"Hot take alert 🔥"}</h3><div class="split2"><span class="r" style="flex:${Math.max(rp,8)}">${rp>=14?"🚩 "+rp+"%":""}</span><span class="g" style="flex:${Math.max(gp,8)}">${gp>=14?"💚 "+gp+"%":""}</span></div><p>${t} vote${t===1?"":"s"} so far</p><button class="btn pink" id="nx">${i+1<deck.length?"Next":"See my flag type"}</button></div>`;
+ document.querySelector(".vote").style.visibility="hidden";document.getElementById("nx").onclick=()=>{i++;card()}}
+function done(){const n=deck.length,rr=reds/n,ag=Math.round(agree/n*100);
+ const T=rr>=.75?["🚩","The Walking Red Flag Detector","Nobody gets past you. Your standards have standards."]:rr>=.5?["🧐","The Picky One","You give chances, but only one. Respect."]:rr>=.25?["⚖️","The Balanced Bestie","You see both sides. Everyone wants you in the group chat."]:["💚","The Green Flag Collector","You see the best in everyone. Protect this one at all costs."];
+ const txt=`I got “${T[1]}” ${T[0]} on Red Flag or Green Flag. ${reds}/${n} red flags, ${ag}% agree with India. Your turn: ${location.origin+location.pathname}`;
+ app.innerHTML=`<div class="card prof"><div class="big">${T[0]}</div><p style="font-weight:800;letter-spacing:.15em;font-size:12px;color:var(--mute)">YOU ARE</p><h2>${T[1]}</h2><p>${T[2]}</p><div class="stats"><div><b>${reds}</b><small>red flags</small></div><div><b>${n-reds}</b><small>green flags</small></div><div><b>${ag}%</b><small>agree with India</small></div></div><a class="btn mint" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">Send to the group chat</a><button class="btn ghost" id="cp" style="margin-top:10px">Copy result</button><button class="btn" id="ag" style="margin-top:10px">Play another pack</button></div>`;
+ if(window.confetti)confetti();
+ document.getElementById("cp").onclick=()=>copyText(txt).then(ok=>document.getElementById("cp").textContent=ok?"Copied!":"Copy failed");document.getElementById("ag").onclick=intro}
+intro();
+</script></body></html>
