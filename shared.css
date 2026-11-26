@@ -171,3 +171,18 @@ footer{border-top:2px solid var(--stroke)}footer a{border-bottom-color:var(--str
 @media (min-width:761px){.phone .scr{min-height:200px}.phones{height:480px}.phone:nth-child(3){top:290px}}
 
 @media (max-width:760px){.h1b{font-size:34px;letter-spacing:-1px}.hero{font-size:32px}.phone b{font-size:16px}.phone b.s{font-size:14px}.phone .row2 span{font-size:22px}.phone .row2 b{font-size:14px}.phone small{font-size:10px;letter-spacing:.1em}.phone em{font-size:12px}.joinbox input{font-size:18px}}
+
+/* v7 motion polish */
+@keyframes pgin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+body.site main{animation:pgin .5s cubic-bezier(.2,.8,.2,1) both}
+body.leave main{opacity:0;transform:translateY(-8px);transition:opacity .2s,transform .2s}
+.btn{transition:transform .15s cubic-bezier(.3,1.6,.5,1),box-shadow .15s,filter .2s}
+.btn:hover{filter:brightness(1.05)}
+.btn:active{transform:translate(3px,3px) scale(.98)!important;box-shadow:0 0 0 var(--ink)!important}
+.game{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s;will-change:transform}
+.game:not(.soon):hover{box-shadow:10px 10px 0 var(--ink)}
+.game .art{display:inline-block;transition:transform .4s cubic-bezier(.3,1.8,.5,1)}
+.game:hover .art{transform:scale(1.25) rotate(-10deg)}
+.nav .logo::after{display:inline-block;animation:pulse 2.4s ease-in-out infinite}
+::selection{background:var(--sun);color:var(--ink)}
+@media (prefers-reduced-motion:reduce){body.site main{animation:none}.game,.btn{transition:none}}
