@@ -117,3 +117,4 @@ button,input,select,textarea{font-family:inherit}
 .btn,.game,.card{-webkit-tap-highlight-color:transparent}
 .btn.pink:focus-visible{outline-color:var(--ink)}
 @media (min-width:761px){.hero2{padding-top:36px}}
+#app>.btn.pink:disabled{opacity:1;background:#4a3322;color:#a99a8c}
