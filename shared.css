@@ -169,3 +169,5 @@ footer{border-top:2px solid var(--stroke)}footer a{border-bottom-color:var(--str
 @media (max-width:760px){.phones{height:380px;max-width:340px}.phone{width:60%;padding:10px}.phone b{font-size:20px}.phone:nth-child(2){top:70px}.phone:nth-child(3){top:215px}.joinbox input{font-size:20px}}
 .hero2 .sub{margin-left:0;margin-right:0}
 @media (min-width:761px){.phone .scr{min-height:200px}.phones{height:480px}.phone:nth-child(3){top:290px}}
+
+@media (max-width:760px){.h1b{font-size:34px;letter-spacing:-1px}.hero{font-size:32px}.phone b{font-size:16px}.phone b.s{font-size:14px}.phone .row2 span{font-size:22px}.phone .row2 b{font-size:14px}.phone small{font-size:10px;letter-spacing:.1em}.phone em{font-size:12px}.joinbox input{font-size:18px}}
