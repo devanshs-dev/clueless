@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0B0612"><title>After Dark – a game for two · Clueless</title><meta name="description" content="After Dark: a flirty, steamy truth-or-dare for couples. Four heat levels. One phone. 18+ only."><meta property="og:title" content="After Dark – a game for two"><meta property="og:description" content="Four heat levels. One phone. How far will you two go? 18+ only."><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><meta name="robots" content="noindex"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%230B0612%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-size=%2738%27 text-anchor=%27middle%27%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0B0612;--ink:#F7EDF4;--mute:#A893A8;--h:#FF3D7F;--h2:#FF8A3D;--glass:rgba(255,255,255,.06);--line:rgba(255,255,255,.12)}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:500 16px/1.5 Manrope,system-ui,sans-serif;overflow-x:hidden;min-height:100dvh}
+button,input{font:inherit;color:inherit}
+.blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:.55;pointer-events:none;z-index:0;transition:background 1.2s ease}
+.b1{width:60vmax;height:60vmax;left:-20vmax;top:-25vmax;background:var(--h);animation:fl 18s ease-in-out infinite}
+.b2{width:50vmax;height:50vmax;right:-20vmax;bottom:-20vmax;background:var(--h2);animation:fl 22s ease-in-out infinite reverse}
+.b3{width:30vmax;height:30vmax;left:40%;top:40%;background:#7B2CFF;opacity:.35;animation:fl 26s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(6vmax,4vmax) scale(1.1)}66%{transform:translate(-4vmax,6vmax) scale(.92)}}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+#app{position:relative;z-index:2;max-width:460px;margin:0 auto;min-height:100dvh;padding:20px 20px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.top a,.top button{color:var(--mute);text-decoration:none;font-size:14px;background:none;border:0;cursor:pointer}
+.logo{font:italic 500 22px Fraunces,serif;color:var(--ink)!important}
+.scr{flex:1;display:flex;flex-direction:column;justify-content:center;animation:in .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes in{from{opacity:0;transform:translateY(24px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+h1{font:600 clamp(46px,13vw,64px)/.95 Fraunces,serif;letter-spacing:-1.5px;margin-bottom:14px}
+h1 em{font-style:italic;background:linear-gradient(90deg,var(--h),var(--h2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font:600 30px/1.1 Fraunces,serif;margin-bottom:10px}
+p.lead{color:var(--mute);font-size:17px;margin-bottom:26px}
+.btn{display:block;width:100%;padding:17px;border-radius:18px;border:0;font-weight:800;font-size:17px;cursor:pointer;transition:transform .15s,box-shadow .3s;text-align:center;text-decoration:none}
+.btn:active{transform:scale(.96)}
+.hot{background:linear-gradient(100deg,var(--h),var(--h2));color:#fff;box-shadow:0 10px 40px -8px var(--h)}
+.ghost{background:var(--glass);border:1px solid var(--line);margin-top:10px;color:var(--ink)}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13px;color:var(--mute);margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase}
+.field input{width:100%;padding:15px 16px;border-radius:14px;background:var(--glass);border:1px solid var(--line);outline:0;font-size:17px;transition:border .2s}
+.field input:focus{border-color:var(--h)}
+.lv{display:grid;gap:10px;margin:8px 0 22px}
+.lvb{display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:18px;background:var(--glass);border:1px solid var(--line);cursor:pointer;text-align:left;transition:all .25s}
+.lvb i{font-style:normal;font-size:28px;width:40px;text-align:center}
+.lvb b{display:block;font-size:16px}.lvb small{color:var(--mute);font-size:13px}
+.lvb.on{border-color:var(--h);background:rgba(255,61,127,.14);transform:scale(1.02)}
+.chk{display:flex;gap:10px;align-items:center;color:var(--mute);font-size:14px;margin-bottom:16px;cursor:pointer}
+.chk input{accent-color:var(--h);width:18px;height:18px}
+/* game */
+.hud{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.who{font:italic 500 26px Fraunces,serif}
+.who span{display:inline-block;animation:in .5s both}
+.heat{display:flex;gap:4px}.heat i{width:22px;height:6px;border-radius:3px;background:var(--line);transition:background .4s}.heat i.on{background:linear-gradient(90deg,var(--h),var(--h2))}
+.stage{perspective:1200px;flex:1;display:flex;align-items:center;justify-content:center;min-height:380px;position:relative}
+.card{width:100%;aspect-ratio:3/4;max-height:56vh;position:relative;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,1.4,.4,1);cursor:pointer;touch-action:pan-y}
+.card.flip{transform:rotateY(180deg)}
+.card.out{transition:transform .45s ease-in,opacity .45s;opacity:0}
+.face{position:absolute;inset:0;border-radius:28px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:30px;text-align:center;border:1px solid var(--line);overflow:hidden}
+.back{background:radial-gradient(circle at 30% 20%,#3A1030,#160A1F 70%);box-shadow:0 30px 80px -20px rgba(255,61,127,.45)}
+.back .m{font:italic 600 64px Fraunces,serif;background:linear-gradient(90deg,var(--h),var(--h2));-webkit-background-clip:text;background-clip:text;color:transparent;animation:br 2.4s ease-in-out infinite}
+@keyframes br{50%{filter:brightness(1.5);transform:scale(1.06)}}
+.back small{color:var(--mute);margin-top:12px;letter-spacing:.2em;text-transform:uppercase;font-size:12px}
+.back::after{content:"";position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent,rgba(255,61,127,.18),transparent 30%);animation:sp 6s linear infinite}
+@keyframes sp{to{transform:rotate(1turn)}}
+.front{transform:rotateY(180deg);background:linear-gradient(160deg,#24112B,#12091A);box-shadow:0 30px 80px -20px rgba(255,138,61,.4)}
+.kind{position:absolute;top:22px;left:0;right:0;font-size:12px;letter-spacing:.25em;text-transform:uppercase;font-weight:800;color:var(--h2)}
+.txt{font:600 clamp(22px,6.4vw,28px)/1.3 Fraunces,serif}
+.tm{position:absolute;bottom:22px;font-size:14px;color:var(--mute)}
+.picks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.picks .btn{padding:15px}
+.row3{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.pen{margin-top:12px;text-align:center;color:var(--mute);font-size:14px;min-height:20px}
+.hearts{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden}
+.hearts i{position:absolute;bottom:-40px;font-style:normal;animation:up 2.6s ease-out forwards}
+@keyframes up{to{transform:translateY(-110vh) rotate(var(--r));opacity:0}}
+.timer{height:4px;border-radius:2px;background:var(--line);overflow:hidden;margin-top:14px;opacity:0;transition:opacity .3s}
+.timer.on{opacity:1}.timer b{display:block;height:100%;background:linear-gradient(90deg,var(--h),var(--h2));width:100%}
+.gate{text-align:center}.gate .big{font-size:72px;margin-bottom:10px;animation:br 2s infinite}
+.fine{color:var(--mute);font-size:13px;margin-top:18px;text-align:center}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grain"></div><div class="hearts" id="hz"></div>
+<div id="app"></div>
+<script>
+const $=i=>document.getElementById(i),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+// LEVELS: t = truths, d = dares. {A} = the player whose turn it is, {B} = their partner.
+const L=[
+{k:"sweet",e:"🌸",n:"Sweet",s:"Butterflies, cute confessions",col:["#FF7AB6","#FFB36B"],
+t:["What was the exact moment you knew you liked {B}?","What’s one tiny thing {B} does that makes you melt?","Describe your first impression of {B} in three words.","What’s your favourite photo of the two of you, and why?","Which song makes you think of {B}?","What’s a date you still replay in your head?","What’s something you’ve never told {B} because it felt too cheesy?","If we had a couple name, what would it be?","What do you miss most about {B} when you’re apart?","What’s the most attractive thing about {B}’s personality?","When did you first want to hold {B}’s hand?","What’s one thing you want us to do together this year?"],
+d:["Give {B} a 10-second forehead kiss.","Hold {B}’s hand and say three things you love about them.","Slow dance with {B} for one song. No phones.","Write {B}’s name on your palm with your finger, slowly.","Recreate your first hug, as close as you remember.","Whisper a compliment in {B}’s ear.","Look into {B}’s eyes for 30 seconds without laughing.","Kiss {B} on the cheek, then the other cheek, then the nose.","Give {B} a 1-minute hand massage.","Send {B} a cute text right now, even though they’re next to you."]},
+{k:"flirty",e:"😏",n:"Flirty",s:"Teasing, blushing, close calls",col:["#FF3D7F","#FF8A3D"],
+t:["What outfit of {B}’s drives you a little crazy?","Where on your body do you love being kissed most?","What’s the flirtiest text you’ve ever wanted to send {B}?","What’s one thing {B} does that instantly turns you on?","Rate our first kiss out of 10. Be honest.","What’s your favourite thing {B} wears to bed?","When did you last catch yourself staring at {B}?","What’s the best compliment {B} has ever given you?","Which part of {B} do you think about most?","Where’s the most unexpected place you’ve wanted to kiss {B}?","What’s a nickname you secretly want {B} to call you?","What look from {B} gets you every time?"],
+d:["Kiss {B} somewhere that isn’t their lips. You choose.","Sit on {B}’s lap for the next two rounds.","Give {B} your best ‘come here’ look. Hold it for 10 seconds.","Trace a heart on {B}’s back with one finger.","Kiss {B}’s neck. Once. Slowly.","Bite your lip and stare at {B} until they blush.","Whisper what you want to do to {B} later. Only them.","Give {B} a 30-second shoulder massage.","Let {B} kiss you anywhere on your face, eyes closed.","Read {B}’s last text to you in your most seductive voice."]},
+{k:"spicy",e:"🌶️",n:"Spicy",s:"Things get hot. Lights low.",col:["#FF1F4B","#C2185B"],
+t:["What’s a fantasy you’ve never said out loud?","What’s the boldest thing you’d try with {B}?","Where’s the most daring place you’d want to make out with {B}?","What’s one thing you want {B} to do more often?","What’s the hottest memory we share?","What do you think about when you can’t sleep and {B} isn’t there?","Lights on or lights off? Defend it.","What sound does {B} make that drives you wild?","Describe your perfect night with {B}, start to finish.","What’s something you’d want {B} to whisper to you?","Which of {B}’s outfits would you like to take off first?","Slow and soft, or fast and messy? Why?"],
+d:["Make out with {B} for 30 seconds. Timer starts now.","Remove one piece of clothing of {B}’s choice.","Blindfold {B} and kiss them in three surprise places.","Kiss {B} from their wrist up to their shoulder.","Give {B} a lap dance for one chorus.","Let {B} pick a spot. Kiss it for 10 seconds.","Unbutton or unzip one thing of {B}’s. With your teeth if you dare.","Lie down. {B} has 30 seconds to kiss you anywhere they like.","Describe in detail what you’re going to do to {B} tonight.","Swap one piece of clothing with {B}."]},
+{k:"dark",e:"🖤",n:"After Dark",s:"No rules. Only you two.",col:["#B0003A","#6A00F4"],
+t:["What’s your wildest fantasy involving {B}? Every detail.","What’s one thing you’ve always wanted to try but were too shy to ask?","What’s the most you’ve ever wanted {B} in public?","What should {B} do right now to win this game instantly?","Tell {B} exactly how you like to be touched.","What’s your biggest turn-on that {B} doesn’t know yet?","If {B} were yours for one whole night with zero limits, what happens?","What’s a role you’d love {B} to play for you?","What’s the naughtiest dream you’ve had about {B}?","Which rule would you most love to break together?"],
+d:["{B} is the boss for the next 2 minutes. Do what they say.","Take off one piece of clothing. Slowly. Eye contact.","Blindfold yourself. {B} can do anything they like for 60 seconds.","Kiss {B} like it’s the last night on earth. 60 seconds.","Guide {B}’s hands wherever you want them.","Show {B} exactly how you want to be kissed, on them.","Whisper your fantasy in {B}’s ear while touching their neck.","Lose one item of clothing per wrong answer: {B} asks 3 questions about you.","Let {B} undress you down to one item, their choice which.","Set a 2-minute timer. Hands only. Go."]}];
+const P=(()=>{try{return JSON.parse(localStorage.getItem("ad_p"))||{}}catch(e){return{}}})();
+let S={a:P.a||"",b:P.b||"",lv:P.lv??1,climb:P.climb??true,turn:0,n:0,used:{}};
+const save=()=>{try{localStorage.setItem("ad_p",JSON.stringify({a:S.a,b:S.b,lv:S.lv,climb:S.climb}))}catch(e){}};
+const app=$("app");
+function theme(){const c=L[S.lv].col;document.documentElement.style.setProperty("--h",c[0]);document.documentElement.style.setProperty("--h2",c[1]);document.querySelector(".b1").style.background=c[0];document.querySelector(".b2").style.background=c[1]}
+function hearts(n=14,ch="❤️"){const z=$("hz");for(let i=0;i<n;i++){const h=document.createElement("i");h.textContent=ch;h.style.left=Math.random()*100+"vw";h.style.fontSize=14+Math.random()*24+"px";h.style.setProperty("--r",(Math.random()*120-60)+"deg");h.style.animationDelay=Math.random()*.6+"s";z.appendChild(h);setTimeout(()=>h.remove(),3400)}}
+const hdr=(back)=>`<div class="top"><a class="logo" href="index.html">After Dark</a>${back?`<button id="bk">← Levels</button>`:`<a href="games.html">All games</a>`}</div>`;
+
+function gate(){
+ let ok=false;try{ok=sessionStorage.getItem("ad18")==="1"}catch(e){}
+ if(ok)return setup();
+ app.innerHTML=`${hdr()}<div class="scr gate"><div class="big">🔥</div><h1>After <em>Dark</em></h1><p class="lead">A game for two consenting adults. It gets steamy fast. Play it with your partner, not your group chat.</p><button class="btn hot" id="y">I’m 18 or older</button><a class="btn ghost" href="index.html">Take me back</a><p class="fine">Either of you can say “skip” at any time. No means no, even in a game.</p></div>`;
+ $("y").onclick=()=>{try{sessionStorage.setItem("ad18","1")}catch(e){}hearts(18,"🔥");setup()}}
+
+function setup(){theme();
+ app.innerHTML=`${hdr()}<div class="scr"><h2>Who’s playing tonight?</h2>
+ <div class="field"><label for="a">Player one</label><input id="a" maxlength="14" value="${esc(S.a)}" placeholder="Your name"></div>
+ <div class="field"><label for="b">Player two</label><input id="b" maxlength="14" value="${esc(S.b)}" placeholder="Their name"></div>
+ <div class="field"><label>Start at</label></div><div class="lv">${L.map((l,i)=>`<button class="lvb ${i===S.lv?"on":""}" data-i="${i}"><i>${l.e}</i><span><b>${l.n}</b><small>${l.s}</small></span></button>`).join("")}</div>
+ <label class="chk"><input type="checkbox" id="cl" ${S.climb?"checked":""}> Turn up the heat every 6 cards</label>
+ <button class="btn hot" id="st">Start the game</button></div>`;
+ app.querySelectorAll(".lvb").forEach(b=>b.onclick=()=>{S.lv=+b.dataset.i;app.querySelectorAll(".lvb").forEach(x=>x.classList.toggle("on",x===b));theme()});
+ $("st").onclick=()=>{S.a=$("a").value.trim()||"Player 1";S.b=$("b").value.trim()||"Player 2";S.climb=$("cl").checked;S.n=0;S.turn=Math.random()<.5?0:1;save();hearts();play()}}
+
+const nm=()=>S.turn?S.b:S.a,ot=()=>S.turn?S.a:S.b;
+function pick(type){const l=L[S.lv],arr=l[type],key=l.k+type;S.used[key]=S.used[key]||[];if(S.used[key].length>=arr.length)S.used[key]=[];let i;do{i=Math.floor(Math.random()*arr.length)}while(S.used[key].includes(i));S.used[key].push(i);return arr[i].replace(/\{A\}/g,esc(nm())).replace(/\{B\}/g,esc(ot()))}
+let tmr=null;
+function play(){theme();clearInterval(tmr);
+ const l=L[S.lv];
+ app.innerHTML=`${hdr(1)}<div class="scr"><div class="hud"><div class="who"><span>${esc(nm())}’s turn</span></div><div class="heat" title="${l.n}">${L.map((_,i)=>`<i class="${i<=S.lv?"on":""}"></i>`).join("")}</div></div>
+ <div class="stage"><div class="card" id="cd"><div class="face back"><div class="m">${l.e}</div><small>${l.n} · Truth or dare?</small></div><div class="face front"><div class="kind" id="kd"></div><div class="txt" id="tx"></div><div class="tm" id="tm"></div></div></div></div>
+ <div id="ctl"><div class="picks"><button class="btn ghost" style="margin:0" id="tr">Truth</button><button class="btn hot" id="dr">Dare</button></div><button class="btn ghost" id="rn">🎲 Surprise me</button></div>
+ <div class="timer" id="ti"><b id="tb"></b></div><div class="pen" id="pn"></div></div>`;
+ $("bk").onclick=setup;
+ const go=t=>{const txt=pick(t);$("kd").textContent=(t==="t"?"Truth":"Dare")+" · "+l.n;$("tx").innerHTML=txt;$("tm").textContent="for "+ot()+"’s eyes too";$("cd").classList.add("flip");if(navigator.vibrate)navigator.vibrate(18);
+  $("ctl").innerHTML=`<div class="row3"><button class="btn ghost" style="margin:0" id="sk">Skip 💋</button><button class="btn hot" id="dn">Done 🔥</button></div>`;
+  const m=txt.match(/(\d+)[ -](second|minute)/);if(m&&t==="d"){const sec=+m[1]*(m[2]==="minute"?60:1);const st=Date.now();$("ti").classList.add("on");tmr=setInterval(()=>{const left=1-(Date.now()-st)/1000/sec;$("tb").style.width=Math.max(0,left*100)+"%";if(left<=0){clearInterval(tmr);hearts(10,"⏰");if(navigator.vibrate)navigator.vibrate([60,40,60])}},100)}
+  $("sk").onclick=()=>{$("pn").textContent=ot()+" gets a kiss as payment 💋";next(600)};$("dn").onclick=()=>{hearts(8);next(0)}};
+ $("tr").onclick=()=>go("t");$("dr").onclick=()=>go("d");$("rn").onclick=()=>go(Math.random()<.5?"t":"d");
+ $("cd").onclick=()=>{if(!$("cd").classList.contains("flip"))go(Math.random()<.5?"t":"d")}}
+function next(wait){clearInterval(tmr);setTimeout(()=>{const c=$("cd");c.classList.add("out");c.style.transform="rotateY(180deg) translateX(120%) rotate(18deg)";
+ setTimeout(()=>{S.n++;S.turn=1-S.turn;if(S.climb&&S.n%6===0&&S.lv<L.length-1){S.lv++;levelUp()}else play()},420)},wait)}
+function levelUp(){const l=L[S.lv];theme();hearts(26,l.e);
+ app.innerHTML=`${hdr(1)}<div class="scr gate"><div class="big">${l.e}</div><h1>Level up: <em>${l.n}</em></h1><p class="lead">${l.s}</p><button class="btn hot" id="ok">Bring it on</button><button class="btn ghost" id="st">Stay here a bit</button></div>`;
+ $("ok").onclick=play;$("st").onclick=()=>{S.lv--;play()};$("bk").onclick=setup}
+gate();
+</script></body></html>
