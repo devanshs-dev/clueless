@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0D0D10"><meta name="apple-mobile-web-app-capable" content="yes"><title>Bolo Mat! – Clueless</title><meta name="description" content="Bolo Mat! Describe 5 words in 40 seconds without saying them. Live team game on your phones."><meta property="og:title" content="Bolo Mat! – Clueless"><meta property="og:description" content="Bolo Mat! Describe 5 words in 40 seconds without saying them. Live team game on your phones."><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%230D0D10%27/%3E%3Ctext x=%2732%27 y=%2744%27 font-size=%2740%27 font-weight=%27800%27 font-family=%27Arial%27 text-anchor=%27middle%27 fill=%27%23FF7A1A%27%3EC%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="shared.css"></head><body data-p="hub"><div class="wrap" id="app"></div>
+<script>window.copyText=function(t){try{if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).then(()=>true,()=>false)}catch(e){}var a=document.createElement("textarea");a.value=t;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}a.remove();return Promise.resolve(ok)};</script><script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getDatabase,ref,set,get,update,push,remove,onValue,onDisconnect,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const FB={apiKey:"AIzaSyDggglOfFRfZHIEkLTeooY9vRFb-dXYh5Q",authDomain:"testing-ziago.firebaseapp.com",databaseURL:"https://testing-ziago-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"testing-ziago",appId:"1:573041699267:web:a365a3075205c295c6b576"};
+const TARGET=40,DUR=40,MIN_PER_TEAM=2; // players needed per team in Teams mode
+const TEAMS=["Team Chai","Team Samosa"],AV=["🦁","🐼","🦊","🐸","🦄","🐙","🐯","🐵","🦉","🐧","🐳","🦖","🐝","🦋","🐨","🐰"];
+// ADD NEW GAMES HERE: first one shows as the big card. Games without live:1 appear as "soon".
+const GAMES=[{name:"Bolo Mat!",emoji:"🤐",blurb:"Describe 5 words without saying them. Half desi, half global.",meta:"2–10 players · 40s turns",live:1},{name:"Next game",emoji:"🎨",blurb:"Your next game goes here."},{name:"Another one",emoji:"🕵️",blurb:"Coming soon."}];
+const INDIA="Swiggy,Zomato,Blinkit,UPI,Paytm,BookMyShow,Shark Tank India,Roadies,Bigg Boss,Kota Factory,Panchayat,Mirzapur,Scam 1992,Pushpa,RRR,Naatu Naatu,Baahubali,Dangal,Kantara,3 Idiots,Arijit Singh,Diljit Dosanjh,Coke Studio,Sunburn Festival,Placement Season,Attendance Shortage,Hostel Mess,Backbencher,Bunking Class,Coaching Centre,JEE,IIT,Group Project,Internship,Night Canteen,Maggi at 2 AM,Chai Tapri,Momos,Pav Bhaji,Schezwan,Super Over,Impact Player,RCB,Mumbai Indians,Orange Cap,Helicopter Shot,Wankhede,Chepauk,Virat Kohli,MS Dhoni,Sharma Ji’s Son,Wedding Buffet,Baraat,Sangeet Night,Goa Trip,Manali,Marine Drive,India Gate,Delhi Metro,Mumbai Rains,Bengaluru Traffic,Surge Pricing,Rapido,Cab Cancelled,Delivery Rider,Jugaad,Rishikesh,Hampi,Ladakh,Ooty,Aadhaar Card,Red Fort,Mangalyaan,Chandrayaan,Kabaddi,Pani Puri".split(",");
+const WORLD="Taylor Swift,Spotify Wrapped,Stranger Things,Squid Game,Money Heist,Breaking Bad,The Office,Wednesday Addams,Barbie,Oppenheimer,Interstellar,Deadpool,Avengers Endgame,Joker,Minecraft,Among Us,Fortnite,Valorant,PlayStation 5,AirPods,ChatGPT,TikTok,Snapchat Streak,BeReal,Discord,Twitch,MrBeast,Instagram Reels,Group Chat,Seen Zone,Autocorrect,Incognito Mode,Dark Mode,Captcha,Low Battery,Screen Time,Loading Screen,Rage Quit,Speedrun,Easter Egg,Plot Twist,Cliffhanger,Spoiler Alert,Binge Watch,Karaoke,Playlist,Concert Merch,Festival Wristband,Thrift Shop,Sneakerhead,Matcha Latte,Cold Brew,Bubble Tea,Ramen,Brunch,Meal Prep,Gym Selfie,Marathon,Skateboard,Airport Layover,Jet Lag,Airbnb,Google Maps,Time Zone,Bermuda Triangle,Northern Lights,Black Hole,Mars Rover,Eiffel Tower,Mount Everest,Titanic,Godzilla,Statue of Liberty,Moon Landing,Pirate,Octopus,Delulu,Rizz,Cringe,Red Flag,Ghosting,Situationship,Glow Up,Main Character,NPC,Brain Rot".split(",");
+
+const $=i=>document.getElementById(i),app=$("app"),B=document.body;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pid=(()=>{let v="";try{v=sessionStorage.getItem("pid")}catch(e){}if(!v){v="p"+Math.random().toString(36).slice(2,9);try{sessionStorage.setItem("pid",v)}catch(e){}}return v})();
+const ss=(k,v)=>{try{v===undefined?0:v===null?sessionStorage.removeItem(k):sessionStorage.setItem(k,v);return sessionStorage.getItem(k)||""}catch(e){return ""}};
+const lastName=()=>{try{return localStorage.getItem("name")||""}catch(e){return ""}};
+let db,room=null,code=null,rr=null,off=0,lastKey="",ending=false,lastHits=0,lastL=99;
+const now=()=>Date.now()+off,isHost=()=>room&&room.host===pid,phase=p=>{B.dataset.p=p;B.classList.remove("low")};
+const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9]/g,"");
+function lev(a,b){const d=[];for(let i=0;i<=a.length;i++)d[i]=[i];for(let j=1;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[a.length][b.length]}
+const close=(a,b)=>a&&lev(a,b)<=(b.length>=9?2:b.length>=5?1:0);
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function beep(f,ms){try{const c=beep.c||(beep.c=new(window.AudioContext||window.webkitAudioContext)()),o=c.createOscillator(),g=c.createGain();o.frequency.value=f;g.gain.value=.12;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+ms/1000)}catch(e){}}
+function confetti(){const C=["#FF7A1A","#4CC9F0","#3DDC97","#FFD166","#F4EFE6"];for(let i=0;i<44;i++){const s=document.createElement("span");s.className="cf";s.style.cssText=`left:${Math.random()*100}vw;animation-delay:${Math.random()*1.2}s;background:${C[i%5]};rotate:${Math.random()*360}deg`;B.appendChild(s);setTimeout(()=>s.remove(),5000)}}
+const top=()=>`<div class="top"><a class="logo" href="index.html">Clueless</a>${code?`<span class="pill">Room ${code}</span>`:""}</div>`;
+
+function start(){
+ db=getDatabase(initializeApp(FB));onValue(ref(db,".info/serverTimeOffset"),s=>off=s.val()||0);
+ const q=(new URLSearchParams(location.search).get("room")||"").toUpperCase(),c=ss("code"),n=lastName();
+ if(c&&n)enter(c,n,false).then(e=>{if(e){ss("code",null);hub(q,e)}});else hub(q)}
+function hub(pre,msg){phase("hub");code=null;app.classList.add("go");
+ app.innerHTML=`${top()}<h1 class="hero">Bolo Mat!</h1><p class="sub">Describe 5 words. Your team types the guesses.</p>${msg?`<div class="err">${esc(msg)}</div>`:""}
+ <div class="card" id="jf"><h2>Join the fun</h2><label for="nm">Your name</label><input id="nm" maxlength="14" value="${esc(lastName())}"><label for="cd">Room code</label><input id="cd" maxlength="4" value="${esc(pre)}" placeholder="ABCD" style="text-transform:uppercase"><button class="btn pink" id="jn">Join room</button><button class="btn" id="mk">Create new room</button></div>`;
+ const open=()=>{$("jf").hidden=false;$("jf").scrollIntoView({behavior:"smooth"})};
+ app.querySelectorAll(".game:not(.soon)").forEach(b=>b.onclick=open);
+ const nm=()=>{const v=$("nm").value.trim();if(!v){$("nm").focus();return ""}try{localStorage.setItem("name",v)}catch(e){}return v};
+ $("jn").onclick=async()=>{const n=nm(),c=$("cd").value.trim().toUpperCase();if(!n||c.length<4)return;const e=await enter(c,n,false);if(e)hub(c,e)};
+ $("mk").onclick=async()=>{const n=nm();if(!n)return;const L="ABCDEFGHJKLMNPQRSTUVWXYZ";let e="x";for(let i=0;i<5&&e;i++)e=await enter(Array.from({length:4},()=>L[Math.floor(Math.random()*L.length)]).join(""),n,true);if(e)hub("",e)}}
+
+async function enter(c,name,create){try{
+ const r=ref(db,"rooms/"+c),s=await get(r);
+ if(create){if(s.exists())return "Code clash, try again";await set(r,{host:pid,state:"lobby",turnNo:0,target:TARGET,mix:"mix",mode:"teams",scores:{t0:0,t1:0}})}
+ else{if(!s.exists())return "Room not found";const v=s.val();if(v.state!=="lobby"&&!(v.players&&v.players[pid]))return "That game has already started"}
+ const ps=(await get(ref(db,`rooms/${c}/players`))).val()||{},n=[0,0];Object.values(ps).forEach(p=>n[p.t]++);
+ const pr=ref(db,`rooms/${c}/players/${pid}`),old=ps[pid];
+ await set(pr,{n:name,t:old?old.t:(n[0]<=n[1]?0:1),e:old?old.e:AV[Math.floor(Math.random()*AV.length)]});onDisconnect(pr).remove();
+ code=c;rr=r;ss("code",c);
+ onValue(r,snap=>{room=snap.val();if(!room){ss("code",null);location.href=location.pathname;return}onRoom()});
+ setInterval(tick,250);return ""}catch(e){return "Connection problem: "+e.message}}
+
+const me=()=>room.players&&room.players[pid],mode=()=>room.mode||"teams",nT=()=>mode()==="coop"?1:2,turnTeam=()=>room.turnNo%nT(),guessTeam=()=>mode()==="duel"?1-turnTeam():turnTeam();
+const tn=i=>{if(mode()==="coop")return "Your squad";if(mode()==="duel"){const e=Object.values(room.players||{}).find(p=>p.t===i);return e?e.n:"Player"}return TEAMS[i]};
+function describer(){const m=Object.keys(room.players||{}).filter(k=>room.players[k].t===turnTeam()).sort();return m.length?m[Math.floor(room.turnNo/nT())%m.length]:null}
+const P=id=>room.players&&room.players[id]?room.players[id]:{n:"someone"};
+const av=p=>{const n=(p&&p.n)||"?";let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))%360;return`<i class="dot" style="background:hsl(${h} 75% 62%)">${esc(n[0].toUpperCase())}</i>`};
+function tally(){const w=room.words||[],g=Object.values((room.guesses||{})["t"+room.turnNo]||{});let pts=0;
+ const res=w.map(x=>{const nx=norm(x);let hit=false,exact=false;for(const q of g){const nq=norm(q.t);if(nq===nx){hit=exact=true;break}if(close(nq,nx))hit=true}if(hit)pts+=1+(exact?1:0);return{w:x,hit,exact}});
+ return{res,pts,hits:res.filter(r=>r.hit).length}}
+const score=()=>`<div class="score" ${mode()==="coop"?'style="grid-template-columns:1fr"':""}>${(mode()==="coop"?[0]:[0,1]).map(i=>{const s=(room.scores||{})["t"+i]||0;return`<div class="tm" style="--c:var(--t${i})"><div><b>${tn(i)}</b><span>${s}</span></div><div class="bar"><i style="width:${mode()==="teams"?Math.min(100,s/room.target*100):Math.min(100,(room.turnNo+(room.state==="result"||room.state==="end"?1:0))/(room.total||1)*100)}%"></i></div></div>`}).join("")}</div>`;
+const foot=()=>`<div class="center"><button class="btn ghost" id="lv">Leave game</button> ${isHost()&&room.state!=="lobby"&&room.state!=="end"?'<button class="btn ghost" id="sk">Skip turn</button>':""}</div>`;
+
+function onRoom(){
+ const ids=Object.keys(room.players||{}).sort();if(room.players&&!room.players[room.host]&&ids[0]===pid)update(rr,{host:pid});
+ if(room.state!=="play")ending=false;
+ const k=room.state+"|"+room.turnNo+(room.state==="lobby"?"|"+JSON.stringify(room.players||{})+room.mix:"")+"|"+room.host;
+ if(k!==lastKey){lastKey=k;render()}else if(room.state==="play")live();
+ if(isHost()&&room.state==="play"&&tally().hits===5)endTurn()}
+function render(){const s=room.state;phase(s);const pk=s+"|"+room.turnNo;app.classList.toggle("go",pk!==render.pk);render.pk=pk;({lobby,ready,play,result,end})[s]();
+ const lv=$("lv");if(lv)lv.onclick=async()=>{await remove(ref(db,`rooms/${code}/players/${pid}`));ss("code",null);location.href=location.pathname};
+ const sk=$("sk");if(sk)sk.onclick=()=>update(rr,{state:"ready",turnNo:room.turnNo+1})}
+
+function lobby(){
+ const ps=Object.entries(room.players||{}),m=mode(),N=ps.length,c=[0,1].map(t=>ps.filter(([,p])=>p.t===t).length),link=location.origin+location.pathname+"?room="+code;
+ const chip=([id,p])=>`<span class="chip">${av(p)} ${esc(p.n)}${id===pid?" (you)":""}</span>`;
+ const ok=m==="teams"?c[0]>=MIN_PER_TEAM&&c[1]>=MIN_PER_TEAM:m==="duel"?N===2:N>=2;
+ const why=m==="teams"?"Teams need "+MIN_PER_TEAM+"+ players each. Only "+N+" here? Try Duel or Co-op.":m==="duel"?"Duel is for exactly 2 players.":"Co-op needs 2 or more players.";
+ const MD=[["teams","Teams","4+ players"],["duel","Duel","2 players"],["coop","Co-op","2+ players"]],M=[["mix","50-50 mix"],["india","Only desi"],["world","Only global"]];
+ app.innerHTML=`${top()}<div class="card center"><div class="hint">Room code</div><div class="code">${code}</div><div class="row" style="margin-top:12px"><input id="lk" readonly value="${esc(link)}" aria-label="Invite link"><button class="btn mint" id="cp">Copy</button></div><a class="btn pink" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent("Join my Bolo Mat! game on Clueless: "+link)}">Share on WhatsApp</a></div>
+ ${m==="teams"?`<div class="cols">${[0,1].map(t=>`<div class="card" style="--c:var(--t${t})"><h3>${TEAMS[t]}</h3>${ps.filter(([,p])=>p.t===t).map(chip).join("")||'<span class="hint">empty</span>'}</div>`).join("")}</div><button class="btn" id="sw">Switch my team</button>`:`<div class="card"><h3>Players (${N})</h3>${ps.map(chip).join("")}</div>`}
+ ${isHost()?`<div class="card" style="margin-top:14px"><h3>Mode</h3><div class="seg modes">${MD.map(x=>`<button data-k="${x[0]}" class="${m===x[0]?"on":""}">${x[1]}<small>${x[2]}</small></button>`).join("")}</div><h3 style="margin-top:14px">Words</h3><div class="seg">${M.map(x=>`<button data-m="${x[0]}" class="${room.mix===x[0]?"on":""}">${x[1]}</button>`).join("")}</div></div><button class="btn pink" id="go" ${ok?"":"disabled"}>Start game</button>${ok?"":`<p class="hint center">${why}</p>`}`:`<p class="center"><b>Waiting for the host to start…</b><br><span class="hint">Mode: ${m}</span></p>`}${foot()}`;
+ $("cp").onclick=()=>{copyText(link).then(ok=>{$("cp").textContent=ok?"Copied!":"Copy failed, long-press the link"})};
+ if($("sw"))$("sw").onclick=()=>update(ref(db,`rooms/${code}/players/${pid}`),{t:1-me().t});
+ app.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>update(rr,{mix:b.dataset.m}));
+ app.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>update(rr,{mode:b.dataset.k}));
+ if($("go"))$("go").onclick=()=>{const ids=ps.map(p=>p[0]).sort(),u={state:"ready",turnNo:0,scores:{t0:0,t1:0},used:null,guesses:null,words:null,logged:null,total:m==="duel"?6:m==="coop"?(N<=4?N*2:N):null};
+  if(m==="duel")ids.forEach((id,i)=>u["players/"+id+"/t"]=i);if(m==="coop")ids.forEach(id=>u["players/"+id+"/t"]=0);update(rr,u)}}
+
+function ready(){
+ const t=turnTeam(),d=describer(),mine=me()&&me().t===guessTeam(),iAm=d===pid;
+ app.innerHTML=`${top()}${score()}<div class="card center"><div class="av" style="font-size:44px">${av(P(d))}</div><h2 class="big">${esc(P(d).n)} is up</h2><p>${mode()==="duel"?"Round "+(Math.floor(room.turnNo/2)+1)+" of "+(room.total/2):"for "+tn(t)}</p>
+ ${iAm?`<p><b>You’re the describer!</b> 5 words, ${DUR} seconds. Say anything except the words.</p><button class="btn pink" id="gb">Go!</button>`:mine?"<p><b>Your team is up!</b> Get your keyboard ready.</p>":"<p>Rivals are up. Zip it!</p>"}
+ <details><summary>Rules</summary><p>The describer gets 5 words and ${DUR}s. Teammates type guesses.</p><p>+1 per word, +1 more for perfect spelling. ${mode()==="teams"?"First to "+room.target+" wins.":"Most points after "+room.total+" turns wins."}</p></details></div>${foot()}`;
+ if(iAm)$("gb").onclick=()=>{const used=room.used||[],mix=room.mix||"mix";let a=INDIA.filter(x=>!used.includes(x)),b=WORLD.filter(x=>!used.includes(x));if(a.length<5)a=INDIA;if(b.length<5)b=WORLD;
+  const ni=mix==="india"?5:mix==="world"?0:2+Math.floor(Math.random()*2),w=shuf(shuf(a).slice(0,ni).concat(shuf(b).slice(0,5-ni)));
+  update(rr,{state:"play",words:w,startedAt:serverTimestamp(),dur:DUR,used:used.concat(w)})}}
+
+const left=()=>typeof room.startedAt==="number"?Math.ceil((room.startedAt+(room.dur||DUR)*1000-now())/1000):room.dur||DUR;
+function play(){
+ const t=turnTeam(),d=describer(),iAm=d===pid,mine=me()&&me().t===guessTeam();lastHits=0;lastL=99;let body;
+ if(iAm)body=`<div class="card"><p class="hint center" style="margin:0 0 10px">Describe these. Don’t say them!</p><ul class="words">${(room.words||[]).map((w,i)=>`<li style="--d:${i*80}ms">${esc(w)}</li>`).join("")}</ul></div>`;
+ else if(mine)body=`<div class="card"><p class="hint" id="fd"></p><div id="gl"></div></div><div class="dock"><div class="row"><input id="gi" autocomplete="off" autocapitalize="off" placeholder="Type your guess…" aria-label="Your guess"><button class="btn mint" id="gs">Send</button></div></div>`;
+ else body=`<div class="card center"><h2 class="big">Shhh…</h2><p>${tn(t)} is playing.</p><p class="hint" id="rv"></p></div>`;
+ app.innerHTML=`${top()}${score()}<div class="head"><div class="who"><span class="av">${av(P(d))}</span><span>${esc(P(d).n)} is describing<br><span class="hint">${tn(t)}</span></span></div><div class="clock"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34"/><circle id="rg" cx="40" cy="40" r="34" stroke-dasharray="214" stroke-dashoffset="0"/></svg><b id="tm">${DUR}</b></div></div>${body}${foot()}`;
+ if(mine&&!iAm){const send=()=>{const v=$("gi").value.trim();if(!v||left()<=0)return;push(ref(db,`rooms/${code}/guesses/t${room.turnNo}`),{p:pid,t:v,n:Date.now()});$("gi").value="";$("gi").focus()};
+  $("gs").onclick=send;$("gi").onkeydown=e=>{if(e.key==="Enter")send()};$("gi").focus()}
+ live()}
+function live(){
+ const T=tally();
+ document.querySelectorAll(".words li").forEach((li,i)=>li.classList.toggle("done",T.res[i]&&T.res[i].hit));
+ if(T.hits>lastHits){beep(760,120);setTimeout(()=>beep(990,160),110)}lastHits=T.hits;
+ if($("gl")){const g=Object.values((room.guesses||{})["t"+room.turnNo]||{}).sort((a,b)=>b.n-a.n),ws=(room.words||[]).map(norm);
+  $("gl").innerHTML=g.map(q=>{const n=norm(q.t),h=ws.some(w=>w===n||close(n,w));return`<div class="g"><span>${av(P(q.p))} ${esc(q.t)}</span><span class="${h?"ok":"no"}">${h?"✓ got it":""}</span></div>`}).join("");$("fd").textContent=T.hits+" of 5 found"}
+ if($("rv"))$("rv").textContent=Object.keys((room.guesses||{})["t"+room.turnNo]||{}).length+" guesses so far"}
+function tick(){
+ if(!room||room.state!=="play"||typeof room.startedAt!=="number")return;
+ const l=left(),el=$("tm");if(el){el.textContent=Math.max(0,l);$("rg").style.strokeDashoffset=214*(1-Math.max(0,l)/(room.dur||DUR))}
+ B.classList.toggle("low",l<=10);if(l!==lastL&&l<=5&&l>0)beep(880,80);lastL=l;
+ const gi=$("gi");if(gi&&l<=0){gi.disabled=true;$("gs").disabled=true}
+ if(isHost()&&l<=-1.5)endTurn()}
+function endTurn(){if(ending)return;ending=true;const p=tally().pts,t=turnTeam();update(rr,{state:"result",lastPts:p,["scores/t"+t]:((room.scores||{})["t"+t]||0)+p})}
+
+function result(){
+ const T=tally(),t=turnTeam(),reached=mode()==="teams"?Object.values(room.scores||{}).some(v=>v>=room.target):room.turnNo+1>=room.total;beep(300,350);
+ app.innerHTML=`${top()}${score()}<div class="card"><h2 class="big center" style="margin-bottom:10px">+${room.lastPts||0} for ${tn(t)}</h2>${T.res.map(r=>`<div class="g"><b>${esc(r.w)}</b><span class="${r.hit?"ok":"no"}">${r.hit?(r.exact?"✓ +2 perfect!":"✓ +1"):"missed"}</span></div>`).join("")}</div>
+ ${isHost()?`<button class="btn pink" id="nx">${reached?"See winner":"Next turn"}</button>`:'<p class="center"><b>Waiting for the host…</b></p>'}${foot()}`;
+ if($("nx"))$("nx").onclick=()=>update(rr,reached?{state:"end"}:{state:"ready",turnNo:room.turnNo+1})}
+function end(){
+ const a=room.scores.t0||0,b=room.scores.t1||0,w=mode()==="coop"?((a/room.total>=6.5?"Legend squad":a/room.total>=5?"Solid squad":"Warming up")+" · "+a+" pts"):a===b?"It’s a tie!":tn(a>b?0:1)+" wins!";confetti();if(isHost()&&!room.logged&&mode()!=="coop"){update(rr,{logged:true});const wt=a>b?0:1;push(ref(db,"hall"),{w:a===b?"Tie":tn(wt),s:a+" – "+b,p:Object.values(room.players||{}).filter(p=>p.t===wt).map(p=>p.n),ts:Date.now()})}
+ app.innerHTML=`${top()}<div class="card center"><div class="badge">${mode()==="coop"?"Squad result":"Winner"}</div><h2 class="big">${w}</h2></div>${score()}
+ ${isHost()?'<button class="btn mint" id="pa">Play again</button>':'<p class="center"><b>Waiting for the host…</b></p>'}${foot()}`;
+ if($("pa"))$("pa").onclick=()=>update(rr,{state:"lobby",turnNo:0,scores:{t0:0,t1:0},used:null,guesses:null,words:null,logged:null})}
+start();
+</script></body></html>
