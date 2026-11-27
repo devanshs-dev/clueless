@@ -30,7 +30,7 @@
 .packs{display:grid;gap:10px;margin:16px 0}
 .pk{display:flex;align-items:center;gap:14px;padding:16px;border:3px solid var(--ink);border-radius:20px;background:#fff;box-shadow:4px 4px 0 var(--ink);cursor:pointer;text-align:left;font:inherit;transition:transform .15s}
 .pk:hover{transform:translate(-2px,-2px)}.pk i{font-style:normal;font-size:30px}.pk b{display:block;font-size:17px}.pk small{color:var(--mute)}
-</style></head><body class="site"><div id="nav"></div><main class="wrap"><div class="rf" id="app"></div></main><footer id="ft"></footer><script src="shared.js"></script>
+</style></head><body class="site"><div id="nav"></div><main class="wrap"><div class="rf" id="app"></div></main><footer id="ft"></footer><script src="shared.js"></script><script src="howto.js"></script>
 <script type="module">
 let FB=null;const fb=()=>FB||(FB=import("./fb.js"));fb().catch(()=>{});
 // Each item: [id, category, text]. Keep ids unique and never reuse them (votes are stored by id).
@@ -43,7 +43,7 @@ const PACKS=[["mix","🎲","Everything","A bit of all of it"],["d","💘","Datin
 const app=document.getElementById("app"),N=12;
 let deck=[],i=0,mine=[],agree=0,reds=0;
 const shuf=a=>{a=a.slice();for(let j=a.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[a[j],a[k]]=[a[k],a[j]]}return a};
-function intro(){app.innerHTML=`<h1 class="hero">Red flag or <span style="color:var(--ok)">green</span>?</h1><p class="sub">Swipe ${N} situations. See how everyone voted. Find out what kind of flag <i>you</i> are.</p><div class="packs">${PACKS.map(p=>`<button class="pk" data-p="${p[0]}"><i>${p[1]}</i><span><b>${p[2]}</b><small>${p[3]}</small></span></button>`).join("")}</div><p style="color:var(--mute);font-size:14px;text-align:center">← swipe left for 🚩 · swipe right for 💚 →</p>`;
+function intro(){app.innerHTML=`<h1 class="hero">Red flag or <span style="color:var(--ok)">green</span>?</h1><p class="sub">Swipe ${N} situations. See how everyone voted. Find out what kind of flag <i>you</i> are.</p><button class="btn htp-big" data-howto="flag">▶ How it works (20s)</button><div class="packs">${PACKS.map(p=>`<button class="pk" data-p="${p[0]}"><i>${p[1]}</i><span><b>${p[2]}</b><small>${p[3]}</small></span></button>`).join("")}</div><p style="color:var(--mute);font-size:14px;text-align:center">← swipe left for 🚩 · swipe right for 💚 →</p>`;
  app.querySelectorAll(".pk").forEach(b=>b.onclick=()=>start(b.dataset.p))}
 function start(p){const pool=p==="mix"?Q:Q.filter(q=>q[0].startsWith(p));deck=shuf(pool).slice(0,Math.min(N,pool.length));i=0;mine=[];agree=0;reds=0;card()}
 function card(){if(i>=deck.length)return done();const q=deck[i],nx=deck[i+1];
