@@ -255,3 +255,9 @@ body:has(#jf) #bm-info{display:block}
 .n{transition:transform .4s cubic-bezier(.3,1.8,.4,1)}.card:hover .n{transform:rotate(-12deg) scale(1.1)}
 @media (prefers-reduced-motion:reduce){.marqs .marq div,.rot i,.game .art{animation:none!important}.btn::after{display:none}}
 .marqs .marq{margin-left:-24px;margin-right:-24px}
+/* v8.1 fixes: rotating word never overflows; marquee full width */
+.hero2>div:first-child{min-width:0}
+.marqs{width:100%;overflow:hidden;padding:26px 0}
+.marqs .marq{width:calc(100vw + 80px);margin-left:-40px;margin-right:0;padding:14px 0}
+.marqs .marq{max-width:none!important;opacity:1!important}
+.marqs .m1{transform:rotate(-2deg)}.marqs .m2{transform:rotate(-2deg);margin-top:10px}.marqs{padding:40px 0}
