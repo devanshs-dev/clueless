@@ -186,3 +186,72 @@ body.leave main{opacity:0;transform:translateY(-8px);transition:opacity .2s,tran
 .nav .logo::after{display:inline-block;animation:pulse 2.4s ease-in-out infinite}
 ::selection{background:var(--sun);color:var(--ink)}
 @media (prefers-reduced-motion:reduce){body.site main{animation:none}.game,.btn{transition:none}}
+/* v8 premium pass */
+.rot i{animation:rw5 15s infinite}
+.rot i:nth-child(2){animation-delay:3s}.rot i:nth-child(3){animation-delay:6s}.rot i:nth-child(4){animation-delay:9s}.rot i:nth-child(5){animation-delay:12s}
+@keyframes rw5{0%{opacity:0;transform:translateY(70%) rotate(4deg);filter:blur(6px)}3%,17%{opacity:1;transform:none;filter:none}20%,100%{opacity:0;transform:translateY(-70%) rotate(-4deg);filter:blur(6px)}}
+.kicker{display:inline-block;font:800 12px Manrope,system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 12px;border-radius:99px;transform:rotate(-2deg)}
+/* double marquee */
+.marqs{position:relative;z-index:1;margin:30px 0 10px;padding:18px 0;overflow:hidden}
+.marqs .marq{display:flex;margin:0;padding:12px 0;white-space:nowrap;font:800 clamp(20px,4vw,32px) var(--d)}
+.marqs .marq div{flex:none;padding:0;animation:mq2 38s linear infinite}
+.marqs .m1{transform:rotate(-2.5deg);position:relative;z-index:2;box-shadow:0 6px 0 var(--stroke)}
+.marqs .m2{background:var(--pink2);color:#fff;transform:rotate(2deg);margin-top:-10px}
+.marqs .m2 div{animation-direction:reverse;animation-duration:44s}
+.marqs:hover .marq div{animation-play-state:paused}
+@keyframes mq2{to{transform:translateX(-100%)}}
+/* phones show 3 games */
+.phone b.q{font-size:17px;line-height:1.2}
+.phone em.red{background:var(--bad)}.phone em.hot{background:linear-gradient(90deg,#FF3D7F,#FF8A3D)}
+/* game cards: sticker + play reveal */
+.game{isolation:isolate}
+.game .art{display:grid;place-items:center;width:64px;height:64px;font-size:34px;background:#fff;border:2px solid var(--stroke);border-radius:20px;box-shadow:3px 3px 0 var(--stroke);transform:rotate(-6deg);transition:transform .5s cubic-bezier(.3,1.8,.4,1),box-shadow .3s;margin-bottom:6px}
+.game:nth-child(even) .art{transform:rotate(5deg)}
+.game:not(.soon):hover .art{transform:rotate(0) translateY(-6px) scale(1.12);box-shadow:5px 8px 0 var(--stroke);animation:wig .6s ease .15s}
+@keyframes wig{25%{rotate:-12deg}50%{rotate:10deg}75%{rotate:-5deg}}
+.game .em{position:absolute;top:18px;right:20px;font:800 44px/1 var(--d);color:transparent;-webkit-text-stroke:2px var(--stroke);opacity:.35;transition:opacity .3s,transform .4s}
+.game:not(.soon):hover .em{opacity:1;color:#fff;transform:translateY(-3px) rotate(4deg)}
+.game:not(.soon)::after{content:"Play →";position:absolute;right:16px;bottom:16px;font:800 14px Manrope,system-ui,sans-serif;background:var(--ink);color:#fff;padding:8px 14px;border-radius:99px;transform:translateY(16px) scale(.8);opacity:0;transition:all .35s cubic-bezier(.3,1.6,.4,1)}
+.game:not(.soon):hover::after,.game:not(.soon):focus-visible::after{transform:none;opacity:1}
+.game .tag{align-self:flex-start}
+@media (hover:none){.game:not(.soon)::after{transform:none;opacity:1;padding:6px 12px;font-size:13px}}
+/* buttons: shine + press */
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,#ffffff88,transparent);transform:skewX(-20deg);transition:left .6s;z-index:-1;pointer-events:none}
+.btn:hover::after{left:130%}
+.tapfx{position:fixed;pointer-events:none;z-index:999;width:8px;height:8px;border-radius:50%;animation:tapfx .55s ease-out forwards}
+@keyframes tapfx{to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+/* aura game */
+.aura-band{background:linear-gradient(135deg,#1B1633,#3B1E6B)!important;color:#fff}
+.aura-band .sub{color:#d9d2f0}
+.aura-band .kicker{background:var(--sun);color:var(--ink)}
+.aura{position:relative;max-width:420px;margin:20px auto 0;background:#fff;color:var(--ink);border:2px solid var(--stroke);border-radius:28px;box-shadow:6px 6px 0 var(--sun);padding:26px 20px 22px;text-align:center}
+.aura.shake{animation:shk .45s}
+@keyframes shk{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.dial{position:relative;width:260px;height:130px;margin:0 auto;overflow:hidden}
+.dial::before{content:"";position:absolute;inset:0 0 -130px;border-radius:50%;background:conic-gradient(from 270deg,#E5365B 0 30deg,#FF9E6B 30deg 70deg,#FFC83D 70deg 110deg,#9BE1F5 110deg 150deg,#7B5CFF 150deg 180deg,transparent 180deg);border:3px solid var(--stroke)}
+.dial::after{content:"";position:absolute;left:30px;right:30px;bottom:-100px;height:200px;border-radius:50%;background:#fff;border:3px solid var(--stroke)}
+.zone{position:absolute;inset:0 0 -130px;border-radius:50%;z-index:1;background:conic-gradient(from calc(var(--a,0deg) - 0deg),gold 0 var(--w,30deg),transparent 0);transform:rotate(0);-webkit-mask:radial-gradient(circle,transparent 99px,#000 100px);mask:radial-gradient(circle,transparent 99px,#000 100px);filter:drop-shadow(0 0 6px gold);opacity:.95}
+.needle{position:absolute;left:calc(50% - 3px);bottom:0;width:6px;height:118px;background:var(--ink);border-radius:3px;transform-origin:50% 100%;transform:rotate(-80deg);z-index:3}
+.needle::after{content:"";position:absolute;bottom:-9px;left:-6px;width:18px;height:18px;border-radius:50%;background:var(--ink)}
+.aura-read{margin-top:18px}.aura-read b{display:block;font:800 52px/1 var(--d);transition:transform .2s}
+.aura-read.bump b{animation:bmp .35s cubic-bezier(.3,1.8,.5,1)}
+@keyframes bmp{50%{transform:scale(1.25)}}
+.aura-read span{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.aura-msg{min-height:26px;margin:8px 0 14px;font-weight:700}
+.aura-go{width:100%;font-size:20px;padding:18px}
+.aura-share{margin-top:10px}.aura-share .btn{width:100%}
+.aura-pop{position:absolute;left:50%;top:44%;font:800 22px var(--d);pointer-events:none;animation:apop .9s ease-out forwards;white-space:nowrap}
+@keyframes apop{from{transform:translate(-50%,0) scale(.6);opacity:0}20%{opacity:1;transform:translate(-50%,-10px) scale(1.15)}to{transform:translate(-50%,-70px);opacity:0}}
+/* why cards */
+.vc i{display:grid;place-items:center;width:54px;height:54px;font-size:28px;font-style:normal;border:2px solid var(--stroke);border-radius:16px;background:var(--sun);margin-bottom:10px;box-shadow:3px 3px 0 var(--stroke);transition:transform .4s cubic-bezier(.3,1.8,.4,1)}
+.vc:nth-child(2) i{background:#9BE1F5}.vc:nth-child(3) i{background:#FFB3D1}
+.vc:hover i{transform:rotate(-10deg) scale(1.1)}
+.card.vc{transition:transform .25s,box-shadow .25s}.card.vc:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--stroke)}
+/* bolo mat info (join screen only) */
+#bm-info{display:none;max-width:900px;margin:10px auto 40px;padding:0 16px}
+body:has(#jf) #bm-info{display:block}
+#bm-info .grid3 .card{margin:0}
+.n{transition:transform .4s cubic-bezier(.3,1.8,.4,1)}.card:hover .n{transform:rotate(-12deg) scale(1.1)}
+@media (prefers-reduced-motion:reduce){.marqs .marq div,.rot i,.game .art{animation:none!important}.btn::after{display:none}}
+.marqs .marq{margin-left:-24px;margin-right:-24px}
