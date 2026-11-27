@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#FFF4DC"><title>No Cap Dictionary – Gen Z slang, explained · Clueless</title><meta name="description" content="Gen Z slang as collectible cards. Flip to learn what rizz, delulu, aura and 30+ more words mean, with desi examples. Translate boomer to Gen Z."><meta property="og:title" content="No Cap Dictionary 🧢 – collect every Gen Z word"><meta property="og:description" content="Flip the cards, open a daily pack, and finally understand what your little cousin is saying."><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23FFC83D%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-size=%2738%27 text-anchor=%27middle%27%3E%F0%9F%A7%A2%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="shared.css">
+<style>
+.dx-hero{text-align:left;padding-top:10px}
+.dx-hero h1{font:800 clamp(44px,10vw,96px)/.92 var(--d);letter-spacing:-2px;margin:10px 0 12px}
+.dx-hero h1 .stk{display:inline-block;background:var(--sun);border:3px solid var(--stroke);border-radius:18px;padding:0 14px;transform:rotate(-3deg);box-shadow:5px 5px 0 var(--stroke)}
+.dx-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 8px}
+.dx-search{flex:1 1 260px;display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--stroke);border-radius:16px;padding:4px 6px 4px 14px;box-shadow:4px 4px 0 var(--stroke)}
+.dx-search input{border:0!important;outline:0;flex:1;font:700 17px Manrope,system-ui,sans-serif;padding:10px 0;background:none;box-shadow:none}
+.dx-prog{display:flex;align-items:center;gap:10px;font-weight:800;font-size:14px}
+.dx-prog .pb{width:120px;height:12px;border:2px solid var(--stroke);border-radius:8px;overflow:hidden;background:#fff}.dx-prog .pb b{display:block;height:100%;background:linear-gradient(90deg,#FF5FA2,#7B5CFF);width:0;transition:width .6s cubic-bezier(.2,.9,.2,1)}
+.dx-cats{display:flex;gap:8px;overflow-x:auto;padding:10px 2px 14px;scrollbar-width:none}
+.dx-cats button{flex:none;font:800 14px Manrope,system-ui,sans-serif;padding:9px 14px;border-radius:99px;border:2px solid var(--stroke);background:#fff;color:var(--ink);cursor:pointer;transition:transform .2s}
+.dx-cats button.on{background:var(--ink);color:#fff;transform:rotate(-2deg) scale(1.04)}
+.dx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;perspective:1200px}
+.sc{position:relative;aspect-ratio:5/7;cursor:pointer;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.3,1.3,.4,1);--rx:0deg;--ry:0deg;transform:rotateX(var(--rx)) rotateY(var(--ry));animation:dealIn .6s cubic-bezier(.3,1.4,.5,1) backwards;animation-delay:var(--dd,0s)}
+@keyframes dealIn{from{opacity:0;transform:translateY(40px) rotate(-8deg) scale(.8)}}
+.sc.flip{transform:rotateY(180deg)}
+.sc .fc{position:absolute;inset:0;border-radius:20px;border:3px solid var(--stroke);backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;box-shadow:5px 5px 0 var(--stroke)}
+.sc .front{background:var(--cbg);display:flex;flex-direction:column;padding:12px}
+.sc .front .top{display:flex;justify-content:space-between;align-items:center;font:800 11px Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.sc .rar{background:#fff;border:2px solid var(--stroke);border-radius:99px;padding:3px 8px}
+.sc .art2{flex:1;margin:10px 0;border:2.5px solid var(--stroke);border-radius:14px;background:#fff;display:grid;place-items:center;position:relative;overflow:hidden}
+.sc .art2 .glyph{font:800 clamp(40px,9vw,64px)/1 var(--d);color:var(--cbg);-webkit-text-stroke:2.5px var(--stroke);transform:rotate(-6deg);letter-spacing:-2px;position:relative;z-index:1}
+.sc .art2::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 10px,rgba(27,22,51,.06) 10px 20px)}
+.sc .wd{font:800 clamp(20px,4.6vw,26px)/1 var(--d);letter-spacing:-.5px}
+.sc .pos{font:italic 600 13px Georgia,serif;opacity:.75;margin-top:3px}
+.sc .seen{position:absolute;top:44px;right:16px;z-index:3;background:#12B76A;color:#fff;border:2px solid var(--stroke);border-radius:99px;font:800 11px Manrope;padding:3px 8px;transform:rotate(8deg);display:none}
+.sc.got .seen{display:block}
+.sc .foil{position:absolute;inset:0;pointer-events:none;mix-blend-mode:color-dodge;opacity:0;transition:opacity .3s;background:radial-gradient(circle at var(--fx,50%) var(--fy,50%),rgba(255,255,255,.9),transparent 40%),linear-gradient(115deg,transparent 20%,#ff5fa2 35%,#ffc83d 45%,#12a4d9 55%,#7b5cff 65%,transparent 80%);background-size:100% 100%,250% 250%;background-position:center,var(--fx,50%) var(--fy,50%)}
+.sc:hover .foil,.sc.r3 .foil,.sc.r4 .foil{opacity:.55}
+.sc.r4 .front{box-shadow:5px 5px 0 var(--stroke),0 0 0 4px #FFC83D inset}
+.sc .back{transform:rotateY(180deg);background:#fff;padding:14px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.35}
+.sc .back h4{font:800 22px/1 var(--d);margin:0}
+.sc .back .mean{font-weight:700}
+.sc .back .eg{background:var(--cbg);border:2px solid var(--stroke);border-radius:12px;padding:8px 10px;font-style:italic}
+.sc .back .boom{font-size:12.5px;color:var(--mute)}
+.sc .back .cr{margin-top:auto;font:800 11px Manrope;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.sc .back .cr i{font-style:normal;letter-spacing:2px;font-size:14px}
+.r1{--cbg:#FFF4DC}.r2{--cbg:#9BE1F5}.r3{--cbg:#CBBBFF}.r4{--cbg:#FFC83D}
+@media (max-width:520px){.dx-grid{grid-template-columns:1fr 1fr;gap:12px}}
+.sc .art2 svg{width:62%;height:62%;position:relative;z-index:1;transition:transform .5s cubic-bezier(.3,1.8,.4,1)}
+.sc:hover .art2 svg{transform:scale(1.12) rotate(-8deg)}
+.dx-empty{grid-column:1/-1;text-align:center;padding:40px;font-weight:700;color:var(--mute)}
+/* pack */
+.pack-band{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+@media (max-width:700px){.pack-band{grid-template-columns:1fr;text-align:center;justify-items:center}}
+.pack{width:170px;height:240px;border:3px solid var(--stroke);border-radius:22px;box-shadow:6px 6px 0 var(--stroke);background:linear-gradient(160deg,#FF5FA2,#7B5CFF 55%,#12A4D9);position:relative;cursor:pointer;display:grid;place-items:center;color:#fff;text-align:center;overflow:hidden;transition:transform .3s cubic-bezier(.3,1.8,.4,1);animation:packWob 2.4s ease-in-out infinite}
+@keyframes packWob{50%{transform:rotate(-3deg) translateY(-6px)}}
+.pack:hover{transform:scale(1.05) rotate(3deg)}
+.pack b{font:800 30px/1 var(--d);text-shadow:3px 3px 0 var(--stroke)}
+.pack small{display:block;font-weight:800;font-size:12px;letter-spacing:.15em;margin-top:6px}
+.pack::before{content:"";position:absolute;left:0;right:0;top:22px;height:10px;background:repeating-linear-gradient(90deg,#fff 0 8px,transparent 8px 14px);opacity:.7}
+.pack::after{content:"";position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);animation:shine 2.6s linear infinite}
+@keyframes shine{from{transform:translateX(-40%)}to{transform:translateX(40%)}}
+.pack.used{filter:grayscale(.7);animation:none;cursor:default}
+.ov{position:fixed;inset:0;z-index:900;background:rgba(18,12,36,.82);backdrop-filter:blur(8px);display:grid;place-items:center;padding:20px;animation:hxIn .3s both}
+.ov .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;perspective:1200px}
+.ov .sc{width:min(200px,40vw);animation:burst .8s cubic-bezier(.3,1.5,.5,1) backwards}
+.ov .sc:nth-child(2){animation-delay:.15s}.ov .sc:nth-child(3){animation-delay:.3s}
+@keyframes burst{from{opacity:0;transform:translateY(120px) scale(.3) rotate(20deg)}}
+.ov .cap{color:#fff;text-align:center;font:800 24px var(--d);margin-bottom:16px}
+.ov .btn{margin-top:18px}
+/* translator */
+.tr{display:grid;gap:12px;background:#fff;border:2px solid var(--stroke);border-radius:24px;box-shadow:6px 6px 0 var(--stroke);padding:18px}
+.tr .dir{display:flex;gap:8px}
+.tr .dir button{flex:1;font:800 14px Manrope;padding:10px;border-radius:12px;border:2px solid var(--stroke);background:#fff;cursor:pointer;color:var(--ink)}
+.tr .dir button.on{background:var(--ink);color:#fff}
+.tr textarea{min-height:80px;font:600 17px Manrope;border-radius:14px;padding:12px;resize:vertical}
+.tr .out{min-height:60px;background:var(--sun);border:2px solid var(--stroke);border-radius:14px;padding:12px 14px;font:800 19px/1.35 var(--d);letter-spacing:-.3px}
+.tr .out mark{background:#fff;border-radius:6px;padding:0 4px;color:inherit}
+/* friday drop */
+.drop{position:relative;background:var(--ink);color:#fff;border-radius:28px;padding:28px 22px;overflow:hidden;border:2px solid var(--stroke);box-shadow:6px 6px 0 #FF5FA2}
+.drop h2{font:800 clamp(30px,6vw,50px)/.95 var(--d);letter-spacing:-1px;margin:8px 0 10px}
+.drop p{color:#d9d2f0;max-width:520px}
+.drop .tape{position:absolute;top:18px;right:-50px;transform:rotate(30deg);background:var(--sun);color:var(--ink);font:800 12px Manrope;letter-spacing:.2em;padding:6px 60px;border-block:2px solid var(--stroke)}
+.drop form{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.drop input{flex:1 1 220px;font:700 17px Manrope;padding:14px;border-radius:14px}
+.drop .perks{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.drop .perks span{font-weight:800;font-size:13px;border:2px solid #fff3;border-radius:99px;padding:6px 12px}
+.drop .ok{font-weight:800;color:#3DDC97;margin-top:10px;min-height:22px}
+</style></head><body class="site"><div id="nav"></div><main class="wrap" style="max-width:1100px">
+<section class="dx-hero"><span class="kicker">Gen Z → English</span><h1>No Cap <span class="stk">Dictionary</span> 🧢</h1><p class="sub">Every word your little cousin says, as a collectible card. Tap a card to flip it. Learn them all to go from NPC to fluent.</p>
+<div class="dx-bar"><label class="dx-search"><span aria-hidden="true">🔍</span><input id="q" placeholder="Search a word your cousin said…" aria-label="Search slang"></label><div class="dx-prog"><span id="pg">0/0 learned</span><div class="pb"><b id="pb"></b></div></div></div>
+<div class="dx-cats" id="cats"></div></section>
+<div class="dx-grid" id="grid"></div>
+
+<section class="band" style="margin-top:50px;background:none;border:0;padding-left:0;padding-right:0"><div class="pack-band">
+<div class="pack" id="pk" role="button" tabindex="0" aria-label="Open today's pack"><div><b>DAILY<br>PACK</b><small>3 WORDS · TAP</small></div></div>
+<div><span class="kicker">1 free pack a day</span><h2 class="sec" style="margin-top:6px">Rip open today’s pack</h2><p class="sub">3 random words you haven’t learned yet. Come back tomorrow for a fresh one. Legendary cards are rare, so if you pull one, flex it.</p></div>
+</div></section>
+
+<section style="margin-top:40px"><span class="kicker">Translator</span><h2 class="sec" style="margin-top:6px">Speak both languages</h2>
+<div class="tr"><div class="dir"><button class="on" data-d="z">Boomer → Gen Z</button><button data-d="b">Gen Z → Parents</button></div>
+<textarea id="ti" aria-label="Text to translate">This food is very good, honestly I agree. That guy is embarrassing.</textarea>
+<button class="btn pink" id="tb">Translate ✨</button><div class="out" id="to" aria-live="polite"></div></div></section>
+
+<section style="margin-top:50px"><div class="drop"><span class="tape">EVERY FRIDAY</span><span class="kicker" style="background:#FF5FA2">Not a newsletter</span>
+<h2>The Group Chat Leak 🫢</h2><p>Every Friday: the 3 words that blew up this week, 1 word that’s officially dead (RIP), and the meme you’ll see everywhere by Monday. 30-second read. Zero boring.</p>
+<form id="df"><input type="email" id="de" required placeholder="your@email.com" aria-label="Email"><button class="btn pink">Leak it to me</button></form>
+<div class="perks"><span>📈 3 rising words</span><span>⚰️ 1 dead word</span><span>💀 1 meme</span><span>⏱️ 30 sec</span></div>
+<div class="ok" id="dok" aria-live="polite"></div></div></section>
+</main><footer id="ft"></footer><script src="shared.js"></script>
+<script>
+// [word, category, rarity 1-4, part of speech, meaning, example, boomer translation, cringe if adults use it 0-5]
+const W=[
+["Rizz","dating",1,"noun","Charm. The ability to flirt and pull someone.","“He got her number in 2 minutes. Unreal rizz.”","Charisma",4],
+["Delulu","dating",2,"adjective","Delusional, usually about a crush or a dream. Often said proudly.","“I’m delulu enough to think he’ll text first.”","Unrealistic",3],
+["Situationship","dating",1,"noun","More than friends, less than a relationship. No labels, lots of confusion.","“It’s been 6 months and it’s still a situationship.”","Undefined relationship",2],
+["The ick","dating",1,"noun","A sudden turn-off that ruins someone for you, often over something tiny.","“He clapped when the plane landed. Instant ick.”","Lost interest",2],
+["Green flag","dating",1,"noun","A good sign in someone’s behaviour.","“She remembered my mom’s birthday. Green flag.”","Good quality",1],
+["Beige flag","dating",3,"noun","Not good or bad, just a weirdly specific quirk.","“He names all his plants. Beige flag.”","Odd habit",2],
+["Ghosting","dating",1,"verb","Disappearing from a chat or relationship without any explanation.","“We talked for weeks and then she ghosted.”","Stopped replying",1],
+["Pookie","dating",2,"noun","A cute pet name for someone you love.","“Good morning pookie, did you eat?”","Sweetheart",5],
+["No cap","vibes",1,"phrase","No lie. For real. I’m being honest.","“This biryani is the best in Hyderabad, no cap.”","Honestly",4],
+["Lowkey","vibes",1,"adverb","Kind of, secretly, a little.","“I lowkey want to skip the wedding.”","Somewhat",2],
+["It’s giving","vibes",2,"phrase","It has the energy of… / it looks like…","“That outfit? It’s giving Bollywood villain.”","It resembles",4],
+["Main character","vibes",1,"noun","Acting like you’re the lead of the movie of your life.","“Walking in the rain with earphones in. Main character energy.”","Self-assured",3],
+["Aura","vibes",2,"noun","Your vibe or reputation points. Cool moves gain aura, cringe loses it.","“He tripped on stage. Minus 1000 aura.”","Reputation",3],
+["Era","vibes",2,"noun","A phase of your life with its own vibe.","“I’m in my gym era. Don’t call me after 9.”","Phase",2],
+["Slay","vibes",1,"verb","To do something amazingly well, especially look good.","“You slayed that presentation.”","Did great",4],
+["Ate","vibes",2,"verb","Did it perfectly. “Ate and left no crumbs” means flawless.","“She ate that dance. No crumbs.”","Excelled",4],
+["Bussin","vibes",2,"adjective","Extremely good. Usually about food.","“Mumma’s rajma chawal is bussin.”","Delicious",5],
+["Vibe check","vibes",1,"noun","Checking someone’s mood or energy.","“Quick vibe check before we start the trip?”","How are you feeling?",3],
+["Mid","roast",1,"adjective","Average. Not great, not terrible. Kind of disappointing.","“The movie was mid, the popcorn was better.”","Mediocre",3],
+["NPC","roast",2,"noun","Someone with no original thoughts, like a background video game character.","“He just repeats whatever the topper says. Total NPC.”","Follower",3],
+["Cooked","roast",3,"adjective","Done for. In big trouble.","“Exam is tomorrow and I haven’t opened the book. I’m cooked.”","Doomed",3],
+["Yapping","roast",2,"verb","Talking a lot without saying much.","“Sir has been yapping for 40 minutes.”","Rambling",2],
+["Caught in 4K","roast",2,"phrase","Caught red-handed, with clear proof.","“Said he was sick, posted from Goa. Caught in 4K.”","Caught red-handed",3],
+["Touch grass","roast",1,"phrase","Go outside. You’re too online.","“You’re fighting strangers on Twitter? Touch grass.”","Take a break",3],
+["Brain rot","roast",3,"noun","What too much scrolling does to your brain. Also, the silly content causing it.","“6 hours of reels. Full brain rot.”","Mindless content",2],
+["Fanum tax","roast",4,"noun","When a friend steals a bite of your food. Named after a streamer.","“Bro took half my fries. Fanum tax.”","Food stealing",5],
+["Say less","internet",1,"phrase","Got it, no need to explain, I’m in.","“Free food at the fest? Say less.”","Understood",3],
+["Fr fr","internet",1,"phrase","For real, for real. Seriously.","“I’m sleeping by 11 tonight, fr fr.”","Seriously",4],
+["W / L","internet",1,"noun","Win or loss. Can be about anything.","“Got the window seat. Massive W.”","Win / Loss",3],
+["Rent free","internet",2,"phrase","When something stays in your head and won’t leave.","“That reel lives in my head rent free.”","Can’t stop thinking about it",2],
+["Understood the assignment","internet",2,"phrase","Did exactly what was needed, and did it well.","“Theme was retro and she understood the assignment.”","Nailed it",3],
+["Let him cook","internet",3,"phrase","Let them do their thing, they might be onto something.","“He’s mixing Maggi with Coke. Let him cook.”","Give them a chance",3],
+["Skibidi","internet",4,"adjective","Means nothing and everything. From a viral meme series. Mostly used by kids.","“Why is my 10-year-old cousin saying skibidi to everything?”","Nonsense",5],
+["Aura farming","internet",4,"verb","Doing cool, effortless things just to gain aura.","“Wearing sunglasses at night? Aura farming.”","Showing off",4],
+["Kalesh","desi",2,"noun","Drama or a fight, usually loud and public. Huge on desi internet.","“There was a full kalesh in the society WhatsApp group.”","Quarrel",2],
+["Scene kya hai","desi",2,"phrase","What’s the plan? What’s going on?","“Friday night scene kya hai?”","What’s the plan?",2],
+["Chapri","desi",3,"adjective","Trying too hard to look cool, in a loud way. Use carefully, can sound mean.","“Neon hair, 3 chains, bike stunts. Bit chapri.”","Show-off",4],
+["Jugaad","desi",1,"noun","A clever hack with whatever you have.","“No charger? Jugaad with the TV’s USB port.”","Improvisation",0]];
+const K='stroke="#1B1633" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"';
+const ART={dating:`<svg viewBox="0 0 64 64"><path ${K} fill="#FF5FA2" d="M32 54S8 40 8 23a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 17-24 31-24 31z"/><path ${K} fill="none" d="M18 22a6 6 0 0 1 6-6"/></svg>`,
+vibes:`<svg viewBox="0 0 64 64"><path ${K} fill="#FFC83D" d="M32 4l6 20 20 8-20 8-6 20-6-20-20-8 20-8z"/><path ${K} fill="#7B5CFF" d="M52 4l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>`,
+roast:`<svg viewBox="0 0 64 64"><path ${K} fill="#FF6B1A" d="M32 60c-13 0-20-9-18-20 2-8 8-11 8-20 7 4 10 10 10 16 3-3 4-7 3-12 9 6 15 15 15 22 0 8-7 14-18 14z"/><path ${K} fill="#FFC83D" d="M32 58c-6 0-9-4-8-9 1-4 5-6 6-10 4 4 9 8 9 12 0 5-3 7-7 7z"/></svg>`,
+internet:`<svg viewBox="0 0 64 64"><rect ${K} fill="#12A4D9" x="16" y="4" width="32" height="56" rx="8"/><rect ${K} fill="#fff" x="22" y="12" width="20" height="30" rx="3"/><path ${K} fill="none" d="M26 22c4-4 8-4 12 0M29 27c2-2 4-2 6 0"/><circle fill="#1B1633" cx="32" cy="32" r="2"/><path ${K} d="M28 52h8"/></svg>`,
+desi:`<svg viewBox="0 0 64 64"><path ${K} fill="#fff" d="M14 24h30l-4 30a4 4 0 0 1-4 3H22a4 4 0 0 1-4-3z"/><path ${K} fill="#C8742F" d="M15 30h28l-2 14H17z"/><path ${K} fill="none" d="M44 30h6a5 5 0 0 1 0 10h-8"/><path ${K} fill="none" d="M24 6c-3 4 3 6 0 10M32 4c-3 4 3 6 0 10"/></svg>`};
+const CATS=[["all","All"],["dating","💘 Dating"],["vibes","✨ Vibes"],["roast","🔥 Roasts"],["internet","📱 Internet"],["desi","🇮🇳 Desi"]];
+const RN=["","Common","Rare","Epic","Legendary"];
+let seen=new Set();try{seen=new Set(JSON.parse(localStorage.getItem("dx_seen"))||[])}catch(e){}
+const save=()=>{try{localStorage.setItem("dx_seen",JSON.stringify([...seen]))}catch(e){}prog()};
+const prog=()=>{$("pg").textContent=`${seen.size}/${W.length} learned`;$("pb").style.width=seen.size/W.length*100+"%"};
+let cat="all";
+const card=(w,i,dd)=>{const[wd,c,r,pos,m,eg,boom,cr]=w;return `<div class="sc r${r} ${seen.has(i)?"got":""}" data-i="${i}" style="--dd:${dd}s" tabindex="0" role="button" aria-label="${esc(wd)}, tap to flip">
+<div class="fc front"><div class="top"><span>#${String(i+1).padStart(2,"0")}</span><span class="rar">${RN[r]}</span></div><div class="art2">${ART[c]}</div><div class="wd">${esc(wd)}</div><div class="pos">${pos}</div><span class="seen">learned ✓</span><div class="foil"></div></div>
+<div class="fc back"><h4>${esc(wd)}</h4><div class="mean">${esc(m)}</div><div class="eg">${esc(eg)}</div><div class="boom">👴 Parent version: <b>${esc(boom)}</b></div><div class="cr"><span>Cringe if adults say it</span><i>${"🔥".repeat(cr)||"✅"}</i></div></div></div>`};
+function bind(root){root.querySelectorAll(".sc").forEach(el=>{const i=+el.dataset.i;
+ const flip=()=>{el.classList.toggle("flip");el.style.setProperty("--rx","0deg");el.style.setProperty("--ry","0deg");if(!seen.has(i)){seen.add(i);el.classList.add("got");save();if(seen.size===W.length&&window.confetti)confetti()}};
+ el.onclick=flip;el.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip()}};
+ el.onpointermove=e=>{if(e.pointerType!=="mouse"||el.classList.contains("flip"))return;const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;el.style.setProperty("--ry",(x-.5)*18+"deg");el.style.setProperty("--rx",(.5-y)*18+"deg");el.style.setProperty("--fx",x*100+"%");el.style.setProperty("--fy",y*100+"%")};
+ el.onpointerleave=()=>{el.style.setProperty("--rx","0deg");el.style.setProperty("--ry","0deg")}})}
+function render(){const q=$("q").value.trim().toLowerCase();const list=W.map((w,i)=>[w,i]).filter(([w])=>(cat==="all"||w[1]===cat)&&(!q||(w[0]+" "+w[4]).toLowerCase().includes(q)));
+ $("grid").innerHTML=list.length?list.map(([w,i],k)=>card(w,i,Math.min(k,12)*.04)).join(""):`<div class="dx-empty">No card for “${esc(q)}” yet. <a href="suggest.html">Suggest it</a> and we’ll add it 🫡</div>`;bind($("grid"))}
+$("cats").innerHTML=CATS.map(c=>`<button data-c="${c[0]}" class="${c[0]===cat?"on":""}">${c[1]}</button>`).join("");
+$("cats").onclick=e=>{const b=e.target.closest("button");if(!b)return;cat=b.dataset.c;$("cats").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));render()};
+$("q").oninput=render;render();prog();
+// daily pack
+const today=new Date(Date.now()+19800000).toISOString().slice(0,10);
+const packUsed=()=>{try{return localStorage.getItem("dx_pack")===today}catch(e){return false}};
+const pk=$("pk");const markPack=()=>{if(packUsed()){pk.classList.add("used");pk.innerHTML="<div><b>OPENED</b><small>NEW PACK TOMORROW</small></div>"}};markPack();
+const openPack=()=>{if(packUsed())return;let pool=W.map((w,i)=>i).filter(i=>!seen.has(i));if(pool.length<3)pool=W.map((w,i)=>i);
+ const pick=[];const wt=i=>[0,8,4,2,1][W[i][2]];while(pick.length<3&&pool.length){const tot=pool.reduce((a,i)=>a+wt(i),0);let r=Math.random()*tot;const j=pool.findIndex(i=>(r-=wt(i))<0);pick.push(pool.splice(j<0?0:j,1)[0])}
+ try{localStorage.setItem("dx_pack",today)}catch(e){}
+ const best=Math.max(...pick.map(i=>W[i][2]));const ov=document.createElement("div");ov.className="ov";
+ ov.innerHTML=`<div><div class="cap">${best===4?"LEGENDARY PULL 👑":best===3?"Ooh, an Epic 💜":"Your 3 words for today"}</div><div class="row">${pick.map((i,k)=>card(W[i],i,0)).join("")}</div><div style="text-align:center"><button class="btn pink" id="ovx">Add to collection</button></div></div>`;
+ document.body.appendChild(ov);bind(ov);if(window.confetti)confetti();if(navigator.vibrate)navigator.vibrate([20,40,20]);
+ ov.querySelector("#ovx").onclick=()=>{pick.forEach(i=>seen.add(i));save();ov.remove();markPack();render()}};
+pk.onclick=openPack;pk.onkeydown=e=>{if(e.key==="Enter")openPack()};
+// translator
+let dir="z";
+const Z=[[/\bvery good\b|\bexcellent\b|\bamazing\b|\bdelicious\b/gi,"bussin"],[/\bgood\b|\bnice\b/gi,"valid"],[/\baverage\b|\bokay\b|\bbad\b|\bboring\b/gi,"mid"],[/\bhonestly\b|\bseriously\b|\bto be honest\b/gi,"no cap"],[/\bi agree\b|\bunderstood\b|\bokay sure\b/gi,"say less"],[/\bembarrassing\b|\bawkward\b/gi,"giving the ick"],[/\bshowing off\b/gi,"aura farming"],[/\bsomewhat\b|\ba little\b|\bkind of\b/gi,"lowkey"],[/\bdoomed\b|\bin trouble\b/gi,"cooked"],[/\bwhat is the plan\b|\bwhat's the plan\b/gi,"scene kya hai"],[/\bgreat job\b|\bwell done\b/gi,"you ate"],[/\bfight\b|\bargument\b/gi,"kalesh"],[/\bdarling\b|\bsweetheart\b/gi,"pookie"],[/\bthat guy\b|\bthat man\b/gi,"bro"],[/\bfriend\b/gi,"bestie"]];
+const ends=[" fr fr"," no cap 🧢"," 💀"," periodt"," it’s giving main character"];
+const B=W.map(w=>[new RegExp("\\b"+w[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&").replace(/[’']/g,"[’']")+"\\b","gi"),w[6].toLowerCase()]);
+$("tb").onclick=()=>{let t=esc($("ti").value.trim());if(!t){$("to").textContent="Type something first bestie";return}
+ const R=dir==="z"?Z:B;R.forEach(([re,v])=>{t=t.replace(re,`<mark>${v}</mark>`)});if(dir==="z")t=t.replace(/[.!]?\s*$/,ends[Math.floor(Math.random()*ends.length)]);$("to").innerHTML=t};
+document.querySelector(".tr .dir").onclick=e=>{const b=e.target.closest("button");if(!b)return;dir=b.dataset.d;document.querySelectorAll(".tr .dir button").forEach(x=>x.classList.toggle("on",x===b));$("ti").value=dir==="z"?"This food is very good, honestly I agree. That guy is embarrassing.":"Bro has zero rizz, his outfit was mid. No cap, he’s cooked.";$("tb").click()};
+$("tb").click();
+// friday drop
+$("df").onsubmit=async e=>{e.preventDefault();const v=$("de").value.trim();$("dok").textContent="Sending…";
+ try{const {db,D}=await Promise.race([import("./fb.js"),new Promise((_,x)=>setTimeout(()=>x(1),6000))]);await D.push(D.ref(db,"suggestions"),{k:"drop",t:v.slice(0,200),n:"",ts:Date.now()});$("dok").textContent="You’re in. First leak lands Friday 🫢";$("de").value="";if(window.confetti)confetti()}catch(err){$("dok").textContent="Couldn’t send. Try again in a bit?"}};
+</script><script src="howto.js"></script></body></html>
