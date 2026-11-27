@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#FFF0E6"><title>Table for Two – the first date game · Clueless</title><meta name="description" content="A 15-minute game for two phones on a date. Icebreakers, guess-my-answer and power cards that hit your date’s phone. Loser buys dessert."><meta property="og:title" content="Table for Two 🍝 – play it while you wait for food"><meta property="og:description" content="Two phones, one table. Freeze their screen, send dares, claim a bite of their food. Loser buys dessert."><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23FF6B1A%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-size=%2738%27 text-anchor=%27middle%27%3E%F0%9F%8D%9D%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="shared.css">
+<style>
+body.site{background:radial-gradient(900px 500px at 0% 0%,#FFD9C2 0,transparent 60%),radial-gradient(800px 500px at 100% 30%,#FFD1E3 0,transparent 60%),#FFF6EE}
+.tt{max-width:520px;margin:0 auto;padding-bottom:120px}
+.tt h1{font:800 clamp(48px,13vw,84px)/.88 var(--d);letter-spacing:-2px;margin:8px 0 12px}
+.tt h1 em{font-style:normal;display:inline-block;background:#FF6B1A;color:#fff;border:3px solid var(--stroke);border-radius:16px;padding:0 12px;transform:rotate(-3deg);box-shadow:5px 5px 0 var(--stroke)}
+.plate{position:relative;background:#fff;border:2.5px solid var(--stroke);border-radius:28px;box-shadow:6px 6px 0 var(--stroke);padding:22px 20px;margin:14px 0;animation:ppIn3 .5s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes ppIn3{from{opacity:0;transform:translateY(24px) scale(.96)}}
+.plate h2{font:800 28px/1.08 var(--d);letter-spacing:-.6px;margin:6px 0 10px}
+.plate .q{font:800 clamp(24px,6.4vw,30px)/1.15 var(--d);letter-spacing:-.5px;margin:6px 0 16px}
+.lbl2{font:800 12px Manrope;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.code{font:800 64px/1 var(--d);letter-spacing:10px;text-align:center;margin:10px 0;background:linear-gradient(90deg,#FF6B1A,#FF5FA2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:15px 16px;border:2.5px solid var(--stroke);border-radius:18px;background:#FFF9F2;font:700 17px Manrope;color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 var(--stroke);transition:transform .15s,box-shadow .15s,background .2s}
+.opt:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--stroke)}
+.opt.on{background:#FFD1E3}
+.opt i{font-style:normal;width:30px;height:30px;flex:none;display:grid;place-items:center;border:2px solid var(--stroke);border-radius:50%;background:#fff;font-weight:800;font-size:14px}
+.tot{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tot button{aspect-ratio:1/1.1;border:3px solid var(--stroke);border-radius:24px;font:800 clamp(20px,5.4vw,26px)/1.1 var(--d);cursor:pointer;box-shadow:5px 5px 0 var(--stroke);padding:12px;transition:transform .2s cubic-bezier(.3,1.8,.4,1)}
+.tot button:hover{transform:rotate(-2deg) scale(1.03)}
+.tot button:nth-child(1){background:#FFE27A}.tot button:nth-child(2){background:#9BE1F5}
+.wait{text-align:center;padding:26px 10px}
+.dots{display:inline-flex;gap:6px;margin-top:10px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--ink);animation:dot 1s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes dot{50%{transform:translateY(-8px);opacity:.4}}
+.rev{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.rev div{border:2px solid var(--stroke);border-radius:16px;padding:12px;background:#FFF9F2}
+.rev small{font:800 11px Manrope;letter-spacing:.12em;color:var(--mute);text-transform:uppercase}
+.rev b{display:block;font:800 18px/1.2 var(--d);margin-top:4px}
+.verdict{text-align:center;font:800 24px var(--d);margin:12px 0 4px;animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+.pts{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.pts span{font:800 13px Manrope;border:2px solid var(--stroke);border-radius:99px;padding:5px 10px;background:#C9F2DF}
+.pts span.no{background:#FFD1D8}
+.hud2{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0}
+.hud2 .who{display:flex;align-items:center;gap:8px;font-weight:800}
+.av2{width:36px;height:36px;border-radius:50%;border:2.5px solid var(--stroke);display:grid;place-items:center;font:800 15px var(--d);background:#FFE27A}
+.av2.b{background:#FFB3D1}
+.av2.off{filter:grayscale(1);opacity:.5}
+.prog{height:10px;border:2px solid var(--stroke);border-radius:8px;background:#fff;overflow:hidden;flex:1;margin:0 10px}.prog b{display:block;height:100%;background:linear-gradient(90deg,#FF6B1A,#FF5FA2);transition:width .6s}
+.food{border:2px solid var(--stroke);background:#fff;border-radius:99px;padding:8px 12px;font:800 13px Manrope;cursor:pointer;white-space:nowrap}
+/* power dock */
+.dock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;display:flex;gap:8px;background:var(--ink);padding:8px;border-radius:24px;border:2px solid var(--stroke);box-shadow:0 10px 30px -8px #1B163699;animation:dockIn .5s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes dockIn{from{transform:translate(-50%,120%)}}
+.dock button{width:64px;height:64px;border-radius:18px;border:2px solid #ffffff33;background:#ffffff14;color:#fff;cursor:pointer;display:grid;place-items:center;gap:0;font:800 10px Manrope;letter-spacing:.04em;position:relative;transition:transform .2s cubic-bezier(.3,1.8,.4,1)}
+.dock button span{font-size:26px;line-height:1}
+.dock button:hover{transform:translateY(-6px) rotate(-4deg)}
+.dock button.used{opacity:.3;pointer-events:none;filter:grayscale(1)}
+.dock .tagd{position:absolute;top:-8px;right:-6px;background:#FF5FA2;border:2px solid var(--stroke);border-radius:99px;font-size:10px;padding:1px 6px}
+/* effects on the receiving phone */
+.fx{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:24px;animation:hxIn .2s both}
+.fx .card{max-width:420px;width:100%;text-align:center;border:3px solid var(--stroke);border-radius:30px;padding:28px 22px;box-shadow:8px 8px 0 var(--stroke);animation:slam .5s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes slam{from{transform:scale(1.6) rotate(-8deg);opacity:0}}
+.fx .big{font-size:84px;line-height:1}
+.fx h3{font:800 30px/1.05 var(--d);margin:10px 0 6px;letter-spacing:-.6px}
+.fx p{font-weight:700;margin:0 0 14px}
+.fx.freeze{background:radial-gradient(circle,#dff4ffcc,#7ec8f0ee);backdrop-filter:blur(14px)}
+.fx.freeze .card{background:#E8F7FF}
+.fx.freeze::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ctext x='10' y='40' font-size='26' opacity='.5'%3E❄%3C/text%3E%3Ctext x='50' y='72' font-size='18' opacity='.4'%3E❄%3C/text%3E%3C/svg%3E");animation:snow 6s linear infinite}
+@keyframes snow{to{background-position:0 400px}}
+.fx.dare{background:rgba(27,22,51,.7);backdrop-filter:blur(6px)}.fx.dare .card{background:#FFE27A}
+.fx.eye{background:#1B1633ee}.fx.eye .card{background:#fff}
+.fx.pause{background:rgba(255,107,26,.92)}.fx.pause .card{background:#fff}
+.melt{font:800 54px var(--d);margin:6px 0}
+.eyes{font-size:90px;animation:blink 3s infinite}@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.toast2{position:fixed;left:50%;top:84px;transform:translateX(-50%);z-index:2100;background:var(--ink);color:#fff;border:2px solid var(--stroke);border-radius:99px;padding:12px 18px;font:800 15px Manrope;box-shadow:4px 4px 0 #FF5FA2;animation:tIn .4s cubic-bezier(.3,1.6,.5,1) both;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+@keyframes tIn{from{transform:translate(-50%,-30px);opacity:0}}
+.bite{position:fixed;left:12px;right:12px;top:80px;z-index:2100;background:#FFE27A;border:3px solid var(--stroke);border-radius:22px;padding:16px;box-shadow:6px 6px 0 var(--stroke);display:flex;gap:12px;align-items:center;animation:tIn .5s cubic-bezier(.3,1.6,.5,1) both;max-width:480px;margin:0 auto}
+.bite .big{font-size:44px}.bite b{font:800 18px var(--d)}
+.dpick{display:grid;gap:8px;margin-top:10px}
+/* report */
+.meter{position:relative;width:220px;height:220px;margin:6px auto 10px;border-radius:50%;background:conic-gradient(#FF5FA2 calc(var(--cv,0)*1%),#F3E4EC 0);display:grid;place-items:center;transition:--cv 2s cubic-bezier(.2,.9,.2,1)}
+@property --cv{syntax:"<number>";inherits:false;initial-value:0}
+.meter b{width:170px;height:170px;border-radius:50%;background:#fff;border:3px solid var(--stroke);display:grid;place-items:center;align-content:center;font:800 54px/1 var(--d)}
+.meter b small{font:800 11px Manrope;letter-spacing:.16em;color:var(--mute);display:block;margin-top:4px}
+.rep-title{text-align:center;font:800 30px/1.05 var(--d);margin:4px 0 10px}
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.statrow div{border:2px solid var(--stroke);border-radius:16px;padding:10px 6px;text-align:center;background:#FFF9F2}.statrow b{display:block;font:800 24px var(--d)}.statrow small{font-size:11.5px;font-weight:700;color:var(--mute)}
+.dessert{text-align:center;background:var(--ink);color:#fff;border-radius:20px;padding:16px;font:800 20px var(--d);border:2px solid var(--stroke)}
+.safe{font-size:13px;color:var(--mute);font-weight:600;text-align:center;margin-top:12px}
+@media (prefers-reduced-motion:reduce){.fx *,.dock,.plate{animation:none!important}}
+</style></head><body class="site"><div id="nav"></div><main class="wrap"><div class="tt" id="app"></div></main><footer id="ft"></footer><script src="shared.js"></script>
+<script type="module">
+import {db,D} from "./fb.js";
+const app=document.getElementById("app"),$$=i=>document.getElementById(i);
+// ---------- content ----------
+const ICE=["What’s the most ‘you’ thing you did this week?","What was your toxic trait at 15?","Which song would play when you walk into a room?","What’s a hill you’ll die on? Small or big.","What’s your go-to order when you can’t decide?","Best trip you’ve ever taken, in 3 words.","What’s something you’re lowkey proud of?","Which fictional character are you, honestly?","What’s the last thing that made you laugh out loud?","What’s on your bucket list that would surprise people?"];
+const GQ=[["Ideal Sunday?",["Sleep till 2","Brunch with friends","Solo adventure","Netflix marathon"]],["Which is worse?",["Slow replies","Loud chewing","Being late","No sense of humour"]],["Pick a dream trip",["Goa beach shack","Snowy Manali","Tokyo neon","Paris café"]],["Your love language?",["Words","Time together","Gifts","Hugs and touch"]],["2 AM craving?",["Maggi","Ice cream","Momos","Leftover biryani"]],["In the group chat you’re…",["The meme dealer","The planner","The ghost","The voice-note person"]],["Biggest green flag?",["Good with family","Remembers small things","Makes you laugh","Has ambition"]],["Perfect date length?",["1 hour, then bye","3 hours","Whole day","Until the café kicks us out"]],["Pick a superpower",["Teleport","Read minds","Pause time","Infinite money"]],["How do you handle a fight?",["Talk it out now","Need space first","Send a meme","Pretend it’s fine"]],["Your phone battery is usually…",["100%, always","Around 50%","Living on 3%","It’s dead"]],["Weekend plan energy?",["Plan every hour","Loose plan","Zero plan","Cancel last minute"]]];
+const TOT=[["Chai","Coffee"],["Beach","Mountains"],["Call","Text"],["Early bird","Night owl"],["Dogs","Cats"],["Sweet","Spicy"],["Books","Movies"],["Plan","Go with the flow"],["Big party","Small group"],["Sunrise","Sunset"],["Window seat","Aisle seat"],["Old songs","New songs"]];
+const DARES=["Compliment my outfit in exactly 3 words","Tell me your most embarrassing nickname","Do your best impression of me","Show me the 5th photo in your gallery","Say something nice about me in a fake accent","Order the next drink in a whisper","Tell me a secret that’s safe to tell","Rate my laugh out of 10, honestly"];
+const POW=[["freeze","🧊","Freeze"],["dare","🎯","Dare"],["bite","🍟","Bite tax"],["eye","👀","Stare-off"]];
+// ---------- state ----------
+const qs=new URLSearchParams(location.search);let code=(qs.get("d")||"").toUpperCase().replace(/[^A-Z]/g,"").slice(0,4),role=null,R=null,unsub=null,seen=new Set(),joinedAt=Date.now(),lastI=null,myName="";
+try{myName=localStorage.getItem("tt_name")||""}catch(e){}
+const other=()=>role==="a"?"b":"a",nm=r=>(R&&R.p&&R.p[r]&&R.p[r].n)||"Your date";
+const shuf=a=>{a=a.slice();for(let j=a.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[a[j],a[k]]=[a[k],a[j]]}return a};
+const ref=p=>D.ref(db,"dates/"+code+(p?"/"+p:""));
+// ---------- screens ----------
+function home(){app.innerHTML=`<span class="kicker">Two phones · one table</span><h1>Table for <em>Two</em></h1><p class="sub">The game you play while waiting for food. Icebreakers, guess-my-answer, and power cards that hit your date’s phone. Loser buys dessert 🍰</p>
+<button class="btn htp-big" data-howto="date">▶ How it works (20s)</button>
+<div class="plate"><div class="lbl2">Your name</div><input id="nm" maxlength="14" placeholder="So they know it’s you" value="${esc(myName)}" style="margin:8px 0 14px">
+${code?`<div class="lbl2">Joining table</div><div class="code">${esc(code)}</div><button class="btn pink" id="jn">Sit down →</button>`:`<button class="btn pink" id="mk">Get a table 🍽️</button><div style="display:flex;gap:8px;margin-top:10px"><input id="cd" maxlength="4" placeholder="CODE" style="text-transform:uppercase;letter-spacing:4px;font-weight:800;text-align:center"><button class="btn" id="jn" style="width:auto;margin:0">Join</button></div>`}</div>
+<p class="safe">Both of you should be comfy playing. Anyone can skip anything, anytime.</p>`;
+ const getName=()=>{const v=$$("nm").value.trim();if(!v){$$("nm").focus();$$("nm").animate([{transform:"translateX(-6px)"},{transform:"translateX(6px)"},{transform:"none"}],300);return null}myName=v;try{localStorage.setItem("tt_name",v)}catch(e){}return v};
+ if($$("mk"))$$("mk").onclick=async()=>{const n=getName();if(!n)return;const L="ABCDEFGHJKLMNPQRSTUVWXYZ";code=Array.from({length:4},()=>L[Math.floor(Math.random()*L.length)]).join("");role="a";
+  await D.set(ref(),{st:{i:-1,made:Date.now()},p:{a:{n,on:true}}});enter()};
+ $$("jn").onclick=async()=>{const n=getName();if(!n)return;if(!code)code=($$("cd").value||"").toUpperCase().replace(/[^A-Z]/g,"");if(code.length!==4){toast("Enter the 4-letter code");return}
+  const s=(await D.get(ref())).val();if(!s){toast("No table with that code 🤔");code="";return}
+  const mine=(()=>{try{return sessionStorage.getItem("tt_"+code)}catch(e){return null}})();
+  role=mine||(!s.p||!s.p.b?"b":(s.p.a&&s.p.a.n===n?"a":s.p.b.n===n?"b":null));if(!role){toast("This table is full 💔");return}
+  await D.update(ref("p/"+role),{n,on:true});enter()}}
+function enter(){try{sessionStorage.setItem("tt_"+code,role)}catch(e){}history.replaceState(null,"","?d="+code);D.onDisconnect(ref("p/"+role+"/on")).set(false);joinedAt=Date.now();
+ if(unsub)unsub();unsub=D.onValue(ref(),s=>{R=s.val();if(!R){app.innerHTML=`<div class="plate"><h2>Table closed</h2><a class="btn pink" href="date.html">Start a new one</a></div>`;return}render();handleFx()})}
+function hud(){const i=R.st.i,N=R.st.seq?R.st.seq.length:10;return `<div class="hud2"><div class="who"><span class="av2 ${R.p.a&&R.p.a.on===false?"off":""}">${esc((nm("a")[0]||"?").toUpperCase())}</span><span class="av2 b ${!R.p.b||R.p.b.on===false?"off":""}">${esc((R.p.b?nm("b")[0]:"?").toUpperCase())}</span></div><div class="prog"><b style="width:${Math.max(0,i)/N*100}%"></b></div><button class="food" id="fd">🍝 Food’s here</button></div>`}
+function render(){const st=R.st;
+ if(st.pause){showPause(st.pause)}else closeFx("pause");
+ if(st.i===-1)return lobby();
+ if(st.i>=st.seq.length)return report();
+ const step=st.seq[st.i],A=(R.ans&&R.ans[st.i])||{},me=A[role]||{},ot=A[other()]||{};
+ if(lastI!==st.i){lastI=st.i;window.scrollTo({top:0,behavior:"smooth"})}
+ let body="";
+ if(step.t==="ice"){const q=ICE[step.q];
+  body=`<div class="plate" key="${st.i}"><div class="lbl2">Icebreaker · both answer out loud</div><div class="q">${q}</div>${me.nx?waitFor("Waiting for "+esc(nm(other()))):`<button class="btn pink" id="nx">We both answered ✓</button>`}</div>`}
+ else if(step.t==="guess"){const [q,o]=GQ[step.q],pn=esc(nm(other()));
+  if(me.me==null)body=`<div class="plate"><div class="lbl2">Guess my answer · step 1 of 2</div><div class="q">${q}</div><div class="lbl2" style="margin-bottom:8px">Your answer (they can’t see)</div><div class="opts">${o.map((x,k)=>`<button class="opt" data-k="${k}"><i>${"ABCD"[k]}</i>${x}</button>`).join("")}</div></div>`;
+  else if(me.g==null)body=`<div class="plate"><div class="lbl2">Guess my answer · step 2 of 2</div><div class="q">What did ${pn} pick?</div><div class="lbl2" style="margin-bottom:8px">${q}</div><div class="opts">${o.map((x,k)=>`<button class="opt" data-g="${k}"><i>${"ABCD"[k]}</i>${x}</button>`).join("")}</div></div>`;
+  else if(ot.g==null)body=`<div class="plate">${waitFor(pn+" is still guessing")}</div>`;
+  else{const match=me.me===ot.me,iGot=me.g===ot.me,theyGot=ot.g===me.me;
+   body=`<div class="plate"><div class="lbl2">${q}</div><div class="rev"><div><small>You picked</small><b>${o[me.me]}</b></div><div><small>${pn} picked</small><b>${o[ot.me]}</b></div></div>
+   <div class="verdict">${match?"Same answer 💞":iGot&&theyGot?"You read each other 🔮":iGot||theyGot?"Half a mind reader 👀":"Strangers… for now 😅"}</div>
+   <div class="pts"><span class="${iGot?"":"no"}">You guessed ${iGot?"right +2":"wrong"}</span><span class="${theyGot?"":"no"}">${pn} guessed ${theyGot?"right +2":"wrong"}</span></div>
+   ${me.nx?waitFor("Waiting for "+pn):`<button class="btn pink" id="nx">Next →</button>`}</div>`}}
+ else if(step.t==="tot"){const [x,y]=TOT[step.q],pn=esc(nm(other()));
+  if(me.pk==null)body=`<div class="plate"><div class="lbl2">This or that · pick fast</div><div class="tot"><button data-p="0">${x}</button><button data-p="1">${y}</button></div></div>`;
+  else if(ot.pk==null)body=`<div class="plate">${waitFor(pn+" is deciding")}</div>`;
+  else{const m=me.pk===ot.pk;body=`<div class="plate" style="text-align:center"><div class="lbl2">${x} or ${y}</div><div class="rev"><div><small>You</small><b>${[x,y][me.pk]}</b></div><div><small>${pn}</small><b>${[x,y][ot.pk]}</b></div></div><div class="verdict">${m?"Match! 💞":"Opposites attract 🧲"}</div>${me.nx?waitFor("Waiting for "+pn):`<button class="btn pink" id="nx">Next →</button>`}</div>`}}
+ app.innerHTML=hud()+body+dock();bindStep(st.i);bindDock();$$("fd").onclick=()=>D.update(ref("st"),{pause:myName||"Someone"});
+ // host advances when both are done
+ if(role==="a"&&me.nx&&ot.nx){D.runTransaction(ref("st/i"),v=>v===st.i?v+1:v)}}
+const waitFor=t=>`<div class="wait"><b style="font:800 20px var(--d)">${t}</b><br><span class="dots"><i></i><i></i><i></i></span><div class="safe" style="margin-top:12px">Psst, use a power card below while you wait 😈</div></div>`;
+function bindStep(i){const put=o=>D.update(ref("ans/"+i+"/"+role),o);
+ app.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{b.classList.add("on");put({me:+b.dataset.k})});
+ app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{b.classList.add("on");put({g:+b.dataset.g})});
+ app.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>put({pk:+b.dataset.p}));
+ if($$("nx"))$$("nx").onclick=()=>put({nx:1})}
+function lobby(){const link=location.origin+location.pathname+"?d="+code,both=R.p.b&&R.p.b.n;
+ app.innerHTML=`<span class="kicker">Your table</span><div class="plate" style="text-align:center"><div class="lbl2">Table code</div><div class="code">${code}</div>
+ ${both?`<h2>${esc(nm("a"))} & ${esc(nm("b"))} 🍽️</h2><p class="sub" style="margin:0 auto 14px">Both seated. 10 rounds, about 15 minutes. Power cards unlock once you start.</p>${role==="a"?`<button class="btn pink" id="go">Start the date 🔥</button>`:waitFor(esc(nm("a"))+" will start it")}`
+ :`<p class="sub" style="margin:0 auto 14px">Send this to your date. They open it on their phone and sit down.</p><a class="btn pink" href="https://wa.me/?text=${encodeURIComponent("Sit at my table 🍝 "+link)}" target="_blank" rel="noopener">Send on WhatsApp</a><button class="btn" id="cp" style="margin-top:10px">Copy link</button>${waitFor("Waiting for your date")}`}</div>`;
+ if($$("cp"))$$("cp").onclick=()=>copyText(link).then(ok=>toast(ok?"Link copied":"Copy failed"));
+ if($$("go"))$$("go").onclick=()=>{const g=shuf([...GQ.keys()]),t=shuf([...TOT.keys()]),c=shuf([...ICE.keys()]);let gi=0,ti=0,ci=0;
+  const seq="i g g t g t i g t g".split(" ").map(k=>k==="i"?{t:"ice",q:c[ci++]}:k==="g"?{t:"guess",q:g[gi++]}:{t:"tot",q:t[ti++]});
+  D.update(ref("st"),{seq,i:0});if(window.confetti)confetti()}}
+// ---------- power cards ----------
+function dock(){const used=(R.p[role]&&R.p[role].pw)||{};return `<div class="dock" aria-label="Power cards">${POW.map(p=>`<button data-pw="${p[0]}" class="${used[p[0]]?"used":""}" aria-label="${p[2]}"><span>${p[1]}</span>${p[2]}${used[p[0]]?"":`<i class="tagd">1</i>`}</button>`).join("")}</div>`}
+function bindDock(){app.querySelectorAll("[data-pw]").forEach(b=>b.onclick=()=>{const k=b.dataset.pw;if(!R.p[other()]){toast("Your date isn’t here yet");return}
+ if(k==="dare"){const f=fxShell("dare",`<div class="big">🎯</div><h3>Pick a dare for ${esc(nm(other()))}</h3><div class="dpick">${shuf(DARES).slice(0,4).map(d=>`<button class="opt" data-d="${esc(d)}">${esc(d)}</button>`).join("")}</div><button class="btn" id="fxc" style="margin-top:10px">Never mind</button>`,"dare-pick");f.querySelectorAll("[data-d]").forEach(x=>x.onclick=()=>{fire("dare",x.dataset.d);f.remove()});f.querySelector("#fxc").onclick=()=>f.remove();return}
+ fire(k)})}
+function fire(k,d){D.update(ref("p/"+role+"/pw"),{[k]:1});D.push(ref("fx"),{to:other(),from:role,k,d:d||"",ts:Date.now()});
+ const n=esc(nm(other()));toast({freeze:`🧊 Froze ${n}’s phone`,dare:`🎯 Dare sent to ${n}`,bite:`🍟 Bite tax claimed from ${n}`,eye:`👀 Stare-off started`}[k]);if(navigator.vibrate)navigator.vibrate(30);
+ if(k==="eye")stareOff(true)}
+function handleFx(){const F=R.fx||{};Object.entries(F).forEach(([id,f])=>{if(seen.has(id))return;seen.add(id);if(f.ts<joinedAt-2000||f.to!==role)return;const from=esc(nm(f.from));if(navigator.vibrate)navigator.vibrate([60,40,60]);
+ if(f.k==="freeze"){let s=8;const el=fxShell("freeze",`<div class="big">🥶</div><h3>${from} froze you</h3><p>Phone locked. Stare at them until it melts.</p><div class="melt" id="ml">${s}</div>`);const t=setInterval(()=>{s--;const m=el.querySelector("#ml");if(m)m.textContent=s;if(s<=0){clearInterval(t);el.remove();toast("Thawed 🫠 Revenge is a power card away")}},1000)}
+ else if(f.k==="dare"){const el=fxShell("dare",`<div class="big">🎯</div><h3>${from} dares you</h3><p style="font-size:20px">${esc(f.d)}</p><button class="btn pink" id="dd">Done 😤</button><button class="btn" id="ds" style="margin-top:8px">Skip (they get a bite 🍟)</button>`);el.querySelector("#dd").onclick=()=>el.remove();el.querySelector("#ds").onclick=()=>{el.remove();toast("Skipped. You owe them a bite 🍟")}}
+ else if(f.k==="bite"){const b=document.createElement("div");b.className="bite";b.innerHTML=`<div class="big">🍟</div><div><b>${from} claimed a bite tax</b><div style="font-weight:700">One bite of your food. No negotiations.</div></div>`;document.body.appendChild(b);setTimeout(()=>b.remove(),5000)}
+ else if(f.k==="eye")stareOff(false,from)})}
+function stareOff(sender,from){let s=10;const el=fxShell("eye",`<div class="eyes">👀</div><h3>Stare-off!</h3><p>${sender?"You started it.":esc(from)+" challenged you."} Look into each other’s eyes. First to laugh or look away loses.</p><div class="melt" id="el">${s}</div>`);
+ const t=setInterval(()=>{s--;const m=el.querySelector("#el");if(m)m.textContent=s;if(s<=0){clearInterval(t);el.querySelector(".card").innerHTML=`<div class="big">😳</div><h3>Time!</h3><p>Who cracked first? Be honest.</p><button class="btn pink" id="ec">Close</button>`;el.querySelector("#ec").onclick=()=>el.remove()}},1000)}
+function fxShell(cls,html,id){const el=document.createElement("div");el.className="fx "+cls;if(id)el.id=id;el.innerHTML=`<div class="card">${html}</div>`;document.body.appendChild(el);return el}
+function showPause(by){if($$("fx-pause"))return;const el=fxShell("pause",`<div class="big">🍝</div><h3>Food’s here!</h3><p>${esc(by)} paused the game. Eat first, flirt later.</p><button class="btn pink" id="rs">Resume game</button>`,"fx-pause");el.querySelector("#rs").onclick=()=>D.update(ref("st"),{pause:""})}
+function closeFx(id){const e=$$("fx-"+id);if(e)e.remove()}
+function toast(t){const e=document.createElement("div");e.className="toast2";e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),2600)}
+// ---------- report ----------
+function report(){let match=0,poss=0,gA=0,gB=0,tm=0,tt=0;R.st.seq.forEach((s,i)=>{const A=(R.ans&&R.ans[i])||{},a=A.a||{},b=A.b||{};
+ if(s.t==="guess"&&a.me!=null&&b.me!=null){poss+=3;if(a.me===b.me)match++;if(a.g===b.me){match++;gA++}if(b.g===a.me){match++;gB++}}
+ if(s.t==="tot"&&a.pk!=null&&b.pk!=null){poss++;tt++;if(a.pk===b.pk){match++;tm++}}});
+ const pct=Math.max(18,Math.round(match/(poss||1)*100)),mine=role==="a"?gA:gB,theirs=role==="a"?gB:gA;
+ const title=pct>=85?"Soulmate speedrun 💍":pct>=70?"Second date loading 🥂":pct>=50?"There’s a spark ✨":pct>=35?"Opposites attract 🧲":"Chaotic duo 🌀";
+ const dessert=gA===gB?"Split the dessert 🤝":`Dessert’s on ${esc(nm(gA<gB?"a":"b"))} 🍰`;
+ app.innerHTML=`<span class="kicker">The vibe report</span><div class="plate" style="text-align:center"><div class="lbl2">${esc(nm("a"))} × ${esc(nm("b"))}</div><div class="meter" id="mt"><b>${pct}%<small>CHEMISTRY</small></b></div><div class="rep-title">${title}</div>
+ <div class="statrow"><div><b>${mine}</b><small>you read them</small></div><div><b>${theirs}</b><small>they read you</small></div><div><b>${tm}/${tt}</b><small>this-or-that matches</small></div></div><div class="dessert">${dessert}</div>
+ <button class="btn pink" id="sh" style="margin-top:14px">Share our vibe report</button><a class="btn" href="date.html" style="margin-top:10px">New table</a></div><p class="safe">Liked each other? Try <a href="us.html">Us.</a> next: a path of 30 dates to do together 💞</p>`;
+ requestAnimationFrame(()=>requestAnimationFrame(()=>$$("mt").style.setProperty("--cv",pct)));if(!report.c){report.c=1;if(window.confetti){confetti();setTimeout(confetti,600)}}
+ $$("sh").onclick=()=>{const t=`${nm("a")} × ${nm("b")}: ${pct}% chemistry on Table for Two 🍝 “${title}”. Play on your next date: ${location.origin}/date.html`;if(navigator.share)navigator.share({text:t}).catch(()=>{});else copyText(t).then(ok=>toast(ok?"Copied!":"Copy failed"))}}
+// ---------- go ----------
+(async()=>{if(code){const mine=(()=>{try{return sessionStorage.getItem("tt_"+code)}catch(e){return null}})();if(mine){const s=(await D.get(ref())).val();if(s){role=mine;await D.update(ref("p/"+role),{on:true});return enter()}}}home()})();
+</script><script src="howto.js"></script></body></html>
