@@ -310,3 +310,8 @@ body:has(#jf) #bm-info{display:block}
 .st-cards i:nth-child(1){right:44%}.st-cards i:nth-child(2){right:22%}.st-cards i:nth-child(3){right:0}
 .slang-tease:hover .st-cards i{transform:rotate(calc(var(--r)*1.8)) translateY(-8px)}
 @media (max-width:600px){.slang-tease{padding-right:22px;padding-bottom:160px}.st-cards{top:auto;bottom:16px;transform:none;width:70%;right:10%}}
+.game:hover .art .trail{animation:trl 1s linear infinite}
+@keyframes trl{to{stroke-dashoffset:-22}}
+.game .art .hrt{transform-box:fill-box;transform-origin:center}
+.game:hover .art .hrt{animation:beat2 .8s ease-in-out infinite}
+@keyframes beat2{30%{transform:scale(1.25)}60%{transform:scale(.95)}}
