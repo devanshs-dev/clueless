@@ -315,3 +315,5 @@ body:has(#jf) #bm-info{display:block}
 .game .art .hrt{transform-box:fill-box;transform-origin:center}
 .game:hover .art .hrt{animation:beat2 .8s ease-in-out infinite}
 @keyframes beat2{30%{transform:scale(1.25)}60%{transform:scale(.95)}}
+.game .art .steam{stroke-dasharray:4 4}
+.game:hover .art .steam{animation:trl 1.2s linear infinite}
