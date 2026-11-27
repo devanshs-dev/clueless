@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#FFE4EE"><title>Us. – a path for two · Clueless</title><meta name="description" content="A Duolingo-style path for couples. Scratch a stop to reveal a date, gift or deep question. Track your days together, your vibe and your memories."><meta property="og:title" content="Us. – scratch your way through your relationship 💞"><meta property="og:description" content="30 scratch-card missions, a live love counter, a memory jar and your Couple Wrapped."><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23FF5FA2%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-size=%2738%27 text-anchor=%27middle%27%3E%F0%9F%92%9E%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="shared.css">
+<style>
+body.site{background:radial-gradient(1200px 600px at 10% -10%,#FFD1E3 0,transparent 60%),radial-gradient(900px 600px at 110% 20%,#E3D9FF 0,transparent 60%),#FFF4F0}
+.us-hero h1{font:800 clamp(56px,14vw,120px)/.85 var(--d);letter-spacing:-3px;margin:8px 0 10px}
+.us-hero h1 i{font-style:normal;color:#FF5FA2;display:inline-block;animation:beat 1.4s ease-in-out infinite}
+@keyframes beat{0%,60%,100%{transform:scale(1)}20%{transform:scale(1.25)}40%{transform:scale(.95)}}
+.tabs{position:sticky;top:64px;z-index:20;display:flex;gap:6px;background:#fff;border:2px solid var(--stroke);border-radius:99px;padding:5px;box-shadow:4px 4px 0 var(--stroke);margin:18px 0 26px;max-width:460px}
+.tabs button{flex:1;border:0;background:none;font:800 15px Manrope,system-ui,sans-serif;padding:11px 8px;border-radius:99px;cursor:pointer;color:var(--ink);transition:background .3s,color .3s,transform .2s}
+.tabs button.on{background:var(--ink);color:#fff;transform:scale(1.03)}
+.pane{display:none;animation:pgin .45s cubic-bezier(.2,.8,.2,1) both}.pane.on{display:block}
+/* ---------- PATH ---------- */
+.path-wrap{position:relative;max-width:440px;margin:0 auto 60px}
+.path-svg{position:absolute;left:0;top:0;width:100%;pointer-events:none;overflow:visible}
+.path-svg .bg{fill:none;stroke:#1B163622;stroke-width:14;stroke-linecap:round;stroke-dasharray:2 22}
+.path-svg .fg{fill:none;stroke:url(#pg);stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
+.unit{position:absolute;left:0;right:0;border:2.5px solid var(--stroke);border-radius:22px;padding:14px 18px;box-shadow:5px 5px 0 var(--stroke);color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.unit b{font:800 20px/1.1 var(--d)}.unit small{display:block;font-weight:700;font-size:13px;opacity:.75}
+.unit .cnt{font:800 14px Manrope;background:#fff;border:2px solid var(--stroke);border-radius:99px;padding:5px 10px;white-space:nowrap}
+.node{position:absolute;width:78px;height:72px;margin-left:-39px;border:0;background:none;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
+.node .disc{position:absolute;inset:0;border-radius:50%;background:var(--nc,#ddd);border:3px solid var(--stroke);box-shadow:0 7px 0 var(--stroke);display:grid;place-items:center;font-size:30px;transition:transform .15s,box-shadow .15s}
+.node:active .disc{transform:translateY(5px);box-shadow:0 2px 0 var(--stroke)}
+.node.locked .disc{background:#E7E2EC;filter:grayscale(1);opacity:.85}
+.node.locked{cursor:default}
+.node.done .disc{background:linear-gradient(145deg,#FFE27A,#FFB800)}
+.node.cur .disc{animation:nodebob 1.6s ease-in-out infinite}
+@keyframes nodebob{50%{transform:translateY(-6px)}}
+.node.cur::before{content:"";position:absolute;inset:-12px;border-radius:50%;border:4px solid #FF5FA2;animation:ringp 1.6s ease-out infinite}
+@keyframes ringp{from{transform:scale(.8);opacity:1}to{transform:scale(1.25);opacity:0}}
+.node .tip{position:absolute;bottom:calc(100% + 16px);left:50%;transform:translateX(-50%);background:#fff;border:2.5px solid var(--stroke);border-radius:14px;padding:6px 12px;font:800 14px Manrope;white-space:nowrap;box-shadow:3px 3px 0 var(--stroke);animation:tipb 1.6s ease-in-out infinite}
+.node .tip::after{content:"";position:absolute;top:100%;left:50%;margin-left:-7px;border:7px solid transparent;border-top-color:var(--stroke)}
+@keyframes tipb{50%{transform:translateX(-50%) translateY(-4px)}}
+.node .lbl{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);font:800 12px Manrope;white-space:nowrap;color:var(--mute)}
+.mascot{position:absolute;font-size:44px;animation:wob 3s ease-in-out infinite;pointer-events:none}
+@keyframes wob{50%{transform:rotate(-8deg) translateY(-6px)}}
+.path-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.chip2{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--stroke);border-radius:16px;padding:8px 14px;box-shadow:3px 3px 0 var(--stroke);font-weight:800}
+.chip2 b{font:800 22px var(--d)}
+/* sheet + scratch */
+.sheet-bg{position:fixed;inset:0;z-index:950;background:rgba(27,22,51,.55);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;animation:hxIn .25s both}
+.sheet{width:min(520px,100%);background:#FFF4F0;border:3px solid var(--stroke);border-bottom:0;border-radius:32px 32px 0 0;padding:14px 20px calc(24px + env(safe-area-inset-bottom));animation:sheetUp .45s cubic-bezier(.2,1.2,.4,1) both;max-height:94vh;overflow:auto}
+@keyframes sheetUp{from{transform:translateY(100%)}}
+.sheet .grab{width:48px;height:5px;border-radius:3px;background:#1B163633;margin:0 auto 14px}
+.sheet .meta{display:flex;justify-content:space-between;align-items:center;font:800 13px Manrope;letter-spacing:.1em;text-transform:uppercase}
+.tag2{border:2px solid var(--stroke);border-radius:99px;padding:4px 10px;background:var(--tc,#fff)}
+.scratch{user-select:none;-webkit-user-select:none;position:relative;margin:16px 0;border:3px solid var(--stroke);border-radius:24px;box-shadow:6px 6px 0 var(--stroke);overflow:hidden;min-height:230px;background:#fff;touch-action:none}
+.scratch .reveal{padding:26px 22px;display:grid;gap:10px;align-content:center;min-height:230px;text-align:center}
+.scratch .reveal .big{font-size:54px;line-height:1}
+.scratch .reveal h3{font:800 clamp(22px,5.6vw,28px)/1.15 var(--d);letter-spacing:-.5px;margin:0}
+.scratch .reveal p{margin:0;color:var(--mute);font-weight:600}
+.scratch canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;transition:opacity .5s}
+.scratch canvas.gone{opacity:0;pointer-events:none}
+.hint2{text-align:center;font-weight:800;font-size:14px;color:var(--mute);min-height:20px}
+.sheet .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.sheet .acts .btn{margin:0}
+.sheet .acts .btn[disabled]{opacity:.4;pointer-events:none}
+/* ---------- TRACKER ---------- */
+.setup{max-width:480px}
+.setup .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.setup label{display:block;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:12px 0 6px}
+.counter{position:relative;background:var(--ink);color:#fff;border-radius:30px;padding:26px 22px;border:2px solid var(--stroke);box-shadow:7px 7px 0 #FF5FA2;overflow:hidden}
+.counter .names{font:800 clamp(26px,6vw,40px)/1 var(--d);letter-spacing:-1px}
+.counter .names i{font-style:normal;color:#FF5FA2;display:inline-block;animation:beat 1.4s infinite}
+.counter .days{font:800 clamp(70px,19vw,140px)/.9 var(--d);letter-spacing:-4px;margin:14px 0 4px;background:linear-gradient(90deg,#FF8FB8,#FFC83D,#9BE1F5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.counter .sub2{font-weight:700;color:#d9d2f0}
+.us-clock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:16px;width:100%}
+.us-clock div{min-width:0;background:#ffffff14;border:1.5px solid #ffffff2a;border-radius:14px;padding:10px 4px;text-align:center}
+.us-clock b{display:block;font:800 clamp(16px,4.6vw,24px) var(--d);overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.us-clock small{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;opacity:.7;text-transform:uppercase}
+.counter .hearts2 i{position:absolute;font-style:normal;opacity:.18;font-size:40px;animation:float2 9s linear infinite}
+@keyframes float2{from{transform:translateY(60px) rotate(0)}to{transform:translateY(-320px) rotate(40deg)}}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:18px}
+.box{background:#fff;border:2px solid var(--stroke);border-radius:24px;padding:18px;box-shadow:5px 5px 0 var(--stroke)}
+.box h3{font:800 20px var(--d);margin:0 0 4px}.box .k{font-size:13px;color:var(--mute);font-weight:700;margin-bottom:12px}
+.ms{display:flex;align-items:center;gap:16px}
+.ring{--rp:0;width:110px;height:110px;flex:none;border-radius:50%;background:conic-gradient(#FF5FA2 calc(var(--rp)*1%),#F3E8EE 0);display:grid;place-items:center;transition:--rp 1s}
+@property --rp{syntax:"<number>";inherits:false;initial-value:0}
+.ring b{width:82px;height:82px;border-radius:50%;background:#fff;border:2px solid var(--stroke);display:grid;place-items:center;font:800 22px var(--d)}
+.ms-list{display:grid;gap:6px;margin-top:12px}
+.ms-list div{display:flex;justify-content:space-between;font-weight:700;font-size:14px;padding:6px 0;border-bottom:1.5px dashed #1B163622}
+.ms-list div.past{color:var(--mute);text-decoration:line-through}
+.vibes{display:flex;justify-content:space-between;gap:6px;margin:4px 0 12px}
+.vibes button{flex:1;font-size:28px;padding:8px 0;border:2px solid var(--stroke);border-radius:16px;background:#FFF9EC;cursor:pointer;transition:transform .25s cubic-bezier(.3,1.8,.4,1)}
+.vibes button:hover{transform:translateY(-3px) rotate(-6deg)}
+.vibes button.on{background:#FFD1E3;transform:scale(1.12);box-shadow:3px 3px 0 var(--stroke)}
+.ekg{width:100%;height:90px;display:block}
+.ekg path{fill:none;stroke:#FF5FA2;stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 1.6s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.ekg circle{fill:#fff;stroke:var(--stroke);stroke-width:2}
+.jar-wrap{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center}
+.jar{position:relative;width:120px;height:150px;cursor:pointer}
+.jar svg{width:100%;height:100%;overflow:visible}
+.jar.shake{animation:jshk .5s}
+@keyframes jshk{20%{transform:rotate(-10deg)}40%{transform:rotate(9deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(4deg)}}
+.memo{background:#FFF9C9;border:2px solid var(--stroke);border-radius:6px;padding:12px;font:600 15px/1.4 Manrope;box-shadow:3px 3px 0 var(--stroke);transform:rotate(-2deg);min-height:60px;animation:ppIn2 .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes ppIn2{from{opacity:0;transform:scale(.6) rotate(-12deg)}}
+.memo small{display:block;color:var(--mute);margin-top:6px;font-size:12px}
+.jar-add{display:flex;gap:8px;margin-top:12px}.jar-add input{flex:1;padding:12px;border-radius:12px;font:600 15px Manrope}
+.jar-add .btn{width:auto;margin:0;padding:12px 16px}
+/* wrapped */
+.wrapped{position:relative;max-width:380px;margin:0 auto;aspect-ratio:9/15;border-radius:30px;border:3px solid var(--stroke);box-shadow:8px 8px 0 var(--stroke);overflow:hidden;color:#fff;background:linear-gradient(160deg,#FF5FA2,#7B5CFF 60%,#1B1633);padding:26px 22px;display:flex;flex-direction:column}
+.wrapped::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:#FFC83D;filter:blur(70px);opacity:.45;top:-120px;right:-120px;animation:fl 12s ease-in-out infinite}
+@keyframes fl{50%{transform:translate(-60px,60px)}}
+.wrapped>*{position:relative}
+.wrapped .wk{font:800 12px Manrope;letter-spacing:.25em;opacity:.85}
+.wrapped h2{font:800 40px/.95 var(--d);letter-spacing:-1.5px;margin:8px 0 18px}
+.wrapped .st{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wrapped .st div{background:#ffffff1f;border:1.5px solid #ffffff44;border-radius:16px;padding:12px}
+.wrapped .st b{display:block;font:800 32px/1 var(--d)}.wrapped .st small{font-weight:700;font-size:12px;opacity:.85}
+.wrapped .title{margin-top:auto;background:#fff;color:var(--ink);border:2.5px solid var(--stroke);border-radius:18px;padding:14px;text-align:center}
+.wrapped .title small{font:800 11px Manrope;letter-spacing:.2em;color:var(--mute)}
+.wrapped .title b{display:block;font:800 24px/1.1 var(--d);margin-top:4px}
+.wrapped .brand{text-align:center;font:800 12px Manrope;margin-top:12px;opacity:.85;letter-spacing:.1em}
+.wr-acts{max-width:380px;margin:18px auto 0;display:grid;gap:10px}
+.privacy{font-size:13px;color:var(--mute);font-weight:600;margin-top:14px;text-align:center}
+@media (prefers-reduced-motion:reduce){.node .disc,.node .tip,.mascot,.us-hero h1 i{animation:none!important}}
+</style></head><body class="site"><div id="nav"></div><main class="wrap" style="max-width:980px">
+<section class="us-hero"><span class="kicker">For two · lives on your phone</span><h1>Us<i>.</i></h1><p class="sub">A path for the two of you. Scratch a stop, do the thing, unlock the next one. Plus a love counter, a memory jar and your very own Couple Wrapped.</p>
+<button class="btn htp-big" data-howto="us">▶ How it works (20s)</button></section>
+<div class="tabs" role="tablist"><button class="on" data-t="path">🗺️ Path</button><button data-t="track">💞 Us</button><button data-t="wrap">🎁 Wrapped</button></div>
+
+<section class="pane on" id="p-path"><div class="path-stats" id="pst"></div><div class="path-wrap" id="pw"></div></section>
+
+<section class="pane" id="p-track"><div id="trk"></div></section>
+
+<section class="pane" id="p-wrap"><div id="wrp"></div></section>
+<p class="privacy">🔒 Everything stays on this phone. No account, no cloud, no one else sees it.</p>
+</main><footer id="ft"></footer><script src="shared.js"></script>
+<script>
+// ---------- data ----------
+const TY={date:["🍝","Date","#FFD1E3"],gift:["🎁","Gift","#FFE27A"],talk:["💬","Talk","#C9E9FF"],dare:["🎯","Challenge","#D9CCFF"]};
+const UNITS=[
+ {n:"Butterflies",e:"🦋",d:"Early days. Easy wins.",c:"#FFD1E3"},
+ {n:"Comfort zone",e:"🛋️",d:"Know each other better.",c:"#C9F2DF"},
+ {n:"Main characters",e:"🌟",d:"Big moves only.",c:"#FFE27A"}];
+const M=[
+["date","Chai at the most random tapri","Find a chai stall neither of you has tried. Rate it out of 10 together."],
+["talk","First impressions, no filter","Tell each other what you honestly thought the first time you met."],
+["gift","A 5-song playlist for them","Make it, name it something unhinged, send it with zero context."],
+["dare","Photo booth, but DIY","Take a 4-photo strip with your phone timer. Different pose every shot."],
+["date","₹300 street food crawl","Total budget ₹300 for both of you. Whoever finds the best bite wins."],
+["talk","The tiny thing you love","Tell them one tiny thing they do that you secretly love."],
+["gift","The hidden note","Hide a handwritten note in their bag or wallet. Say nothing."],
+["dare","Phone swap, 10 minutes","Swap phones and set each other’s wallpaper. No deleting allowed."],
+["date","Sunset, phones in pockets","Find a sunset spot. 15 minutes, no phones, just vibes."],
+["talk","Dream trip in 5 minutes","Plan your dream trip together. Budget: unlimited. Delulu encouraged."],
+["date","Cook something new","Make a dish neither of you has ever cooked. Burning it still counts."],
+["gift","Snack + inside joke","Their favourite snack, plus a sticker or doodle of your inside joke."],
+["talk","Something you’ve never said","Share something you’ve never told anyone. Only if you’re both comfy."],
+["dare","Recreate photo #1","Find your first photo together and recreate it as closely as possible."],
+["date","Their movie, no complaints","They pick the movie. You can’t complain once. Not even a sigh."],
+["talk","What era are we in?","Name the era your relationship is in right now. Agree on a title."],
+["gift","The coupon book","Make 5 coupons like “1 free head massage” or “I’ll do the dishes”."],
+["dare","Learn a dance trend","Learn a 30-second trend together. Posting it is optional (but iconic)."],
+["date","Pick each other a book","Bookstore date. Choose a book for them under ₹400."],
+["talk","One thing to get better at","Each share one thing you want us to get better at. Kindly."],
+["date","The surprise day","Plan a full surprise day for them, start to finish."],
+["gift","Letter for next year","Write them a letter to open in one year. Seal it. Hide it."],
+["talk","Us in 5 years","Describe where you see us in 5 years. Be delulu, it’s fine."],
+["dare","Do a scary thing together","Something that scares one of you, done together. Small counts."],
+["date","No-plan day trip","Go somewhere 2 hours away with zero plan. Just go."],
+["gift","Frame a random moment","Print and frame a photo of an unglamorous moment you love."],
+["talk","Three proud things","Tell them three things you’re proud of them for this year."],
+["dare","24 hours of compliments","Only compliments for a day. Every snarky line costs a chocolate."],
+["date","First date, remastered","Recreate your first date. Same place, better everything."],
+["gift","The boss level 👑","Make a mini scrapbook of your whole path so far."]];
+const K="us_v1";let S={done:[],skips:{},names:["",""],start:"",vibe:{},jar:[]};
+try{Object.assign(S,JSON.parse(localStorage.getItem(K))||{})}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const today=()=>new Date(Date.now()+19800000).toISOString().slice(0,10);
+const order=i=>S.skips[i]!=null?S.skips[i]:i; // shuffled mission index
+// ---------- tabs ----------
+document.querySelector(".tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.id==="p-"+b.dataset.t));({path:drawPath,track:drawTrack,wrap:drawWrap})[b.dataset.t]()};
+// ---------- path ----------
+const PER=10,GAP=118,UNIT_H=110;
+function drawPath(){
+ const pw=$("pw"),W=Math.min(pw.clientWidth||400,440),cur=S.done.length,pts=[];let y=0,html="";
+ for(let u=0;u<UNITS.length;u++){const U=UNITS[u],d=S.done.filter(i=>i>=u*PER&&i<(u+1)*PER).length;
+  html+=`<div class="unit" style="top:${y}px;background:${U.c}"><div><small>Unit ${u+1} · ${U.e}</small><b>${U.n}</b><small>${U.d}</small></div><span class="cnt">${d}/${PER}</span></div>`;y+=UNIT_H+30;
+  for(let k=0;k<PER;k++){const i=u*PER+k,x=W/2+Math.sin(i*.85)*(W*.28),st=S.done.includes(i)?"done":i===cur?"cur":"locked",m=M[order(i)],t=TY[m[0]];
+   pts.push([x,y+36]);
+   html+=`<button class="node ${st}" data-i="${i}" style="left:${x}px;top:${y}px;--nc:${t[2]}" aria-label="Stop ${i+1}: ${st==="locked"?"locked":t[1]}"><span class="disc">${st==="done"?"⭐":st==="locked"?"🔒":t[0]}</span>${st==="cur"?`<span class="tip">${cur===0?"START":"SCRATCH ME"}</span>`:""}${st==="done"?``:""}</button>`;
+   if(k===4&&u<2)html+=`<span class="mascot" style="left:${x>W/2?24:W-70}px;top:${y-10}px">${["🐻","🦆"][u]}</span>`;
+   y+=GAP}
+  y+=10}
+ const d=pts.map((p,j)=>j?`Q ${(pts[j-1][0]+p[0])/2+ (j%2?40:-40)} ${(pts[j-1][1]+p[1])/2} ${p[0]} ${p[1]}`:`M ${p[0]} ${p[1]}`).join(" ");
+ pw.style.height=y+"px";
+ pw.innerHTML=`<svg class="path-svg" height="${y}" viewBox="0 0 ${W} ${y}"><defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF5FA2"/><stop offset=".5" stop-color="#FFB800"/><stop offset="1" stop-color="#7B5CFF"/></linearGradient></defs><path class="bg" d="${d}"/><path class="fg" id="fgp" d="${d}"/></svg>`+html;
+ // progress line up to current node
+ const fg=$("fgp"),L=fg.getTotalLength();let target=0;if(cur>0){const end=pts[Math.min(cur,pts.length-1)];let lo=0,hi=L;for(let n=0;n<24;n++){const mid=(lo+hi)/2;fg.getPointAtLength(mid).y<end[1]?lo=mid:hi=mid}target=cur>=pts.length?L:lo}
+ fg.style.strokeDasharray=L;fg.style.strokeDashoffset=L;requestAnimationFrame(()=>requestAnimationFrame(()=>fg.style.strokeDashoffset=L-target));
+ pw.querySelectorAll(".node").forEach(n=>n.onclick=()=>{const i=+n.dataset.i;if(n.classList.contains("locked")){n.animate([{transform:"translateX(0)"},{transform:"translateX(-6px)"},{transform:"translateX(6px)"},{transform:"translateX(0)"}],{duration:300});return}openStop(i)});
+ const st=streak();$("pst").innerHTML=`<div class="chip2">🗺️ <b>${S.done.length}</b>/30 stops</div><div class="chip2">🔥 <b>${st}</b> day streak</div><div class="chip2">⭐ <b>${S.done.length*10}</b> love XP</div>`;
+ const c=pw.querySelector(".node.cur");if(c&&!drawPath.did){drawPath.did=1;setTimeout(()=>c.scrollIntoView({block:"center",behavior:"smooth"}),400)}}
+function streak(){const set=new Set((S.log||[]).map(l=>l.d));let d=new Date(today()+"T12:00:00Z");if(!set.has(d.toISOString().slice(0,10)))d.setUTCDate(d.getUTCDate()-1);let n=0;while(set.has(d.toISOString().slice(0,10))){n++;d.setUTCDate(d.getUTCDate()-1)}return n}
+function openStop(i){const done=S.done.includes(i),m=M[order(i)],t=TY[m[0]],skipped=S.skipDay===today();
+ const bg=document.createElement("div");bg.className="sheet-bg";
+ bg.innerHTML=`<div class="sheet" role="dialog" aria-label="Stop ${i+1}"><div class="grab"></div><div class="meta"><span>Stop ${i+1} of 30</span><span class="tag2" style="--tc:${t[2]}">${t[0]} ${t[1]}</span></div>
+ <div class="scratch" id="scr"><div class="reveal"><div class="big">${t[0]}</div><h3>${m[1]}</h3><p>${m[2]}</p></div>${done?"":`<canvas id="cv"></canvas>`}</div>
+ <div class="hint2" id="h2">${done?"You two already did this one ⭐":"Scratch with your finger 👆"}</div>
+ <div class="acts">${done?`<button class="btn" id="cl" style="grid-column:1/-1">Close</button>`:`<button class="btn" id="sk" ${skipped?"disabled":""}>🔀 Swap</button><button class="btn pink" id="dn" disabled>We did it ✓</button>`}</div></div>`;
+ document.body.appendChild(bg);document.documentElement.style.overflow="hidden";
+ const close=()=>{bg.remove();document.documentElement.style.overflow=""};bg.onclick=e=>{if(e.target===bg)close()};
+ if(done){$("cl").onclick=close;return}
+ scratchify($("cv"),()=>{$("dn").disabled=false;$("h2").textContent="Revealed! Do it, then tap “We did it” 💞";if(navigator.vibrate)navigator.vibrate([20,30,20])});
+ $("sk").onclick=()=>{const later=[];for(let j=i+1;j<30;j++)later.push(j);if(!later.length)return;const j=later[Math.floor(Math.random()*later.length)],a=order(i),b=order(j);S.skips[i]=b;S.skips[j]=a;S.skipDay=today();save();close();drawPath();openStop(i)};
+ $("dn").onclick=()=>{S.done.push(i);S.log=(S.log||[]).concat({d:today(),i});save();close();if(window.confetti)confetti();drawPath();
+  if(S.done.length%PER===0){setTimeout(()=>unitDone(S.done.length/PER-1),500)}}}
+function unitDone(u){const U=UNITS[u],bg=document.createElement("div");bg.className="sheet-bg";bg.style.alignItems="center";
+ bg.innerHTML=`<div class="sheet" style="border-radius:32px;border-bottom:3px solid var(--stroke);text-align:center"><div style="font-size:80px;animation:beat 1.4s infinite">${U.e}</div><span class="kicker">Unit ${u+1} complete</span><h2 class="sec" style="margin:8px 0">“${U.n}” unlocked a badge</h2><p class="sub">${u<2?"Next unit is open. Keep going, you two.":"You finished the whole path. Legends. Check your Wrapped 🎁"}</p><button class="btn pink" id="ok2">Let’s gooo</button></div>`;
+ document.body.appendChild(bg);if(window.confetti){confetti();setTimeout(confetti,500)}$("ok2").onclick=()=>bg.remove()}
+function scratchify(cv,onDone){const box=cv.parentNode,r=box.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1);cv.width=r.width*dpr;cv.height=r.height*dpr;const x=cv.getContext("2d");x.scale(dpr,dpr);
+ const g=x.createLinearGradient(0,0,r.width,r.height);g.addColorStop(0,"#C9C2D6");g.addColorStop(.35,"#F2EEF7");g.addColorStop(.5,"#B9B0C9");g.addColorStop(.75,"#EDE8F3");g.addColorStop(1,"#A79DBA");x.fillStyle=g;x.fillRect(0,0,r.width,r.height);
+ x.fillStyle="rgba(27,22,51,.08)";for(let i=0;i<260;i++){x.beginPath();x.arc(Math.random()*r.width,Math.random()*r.height,Math.random()*2+.5,0,7);x.fill()}
+ x.font="800 13px Manrope,sans-serif";x.fillStyle="rgba(27,22,51,.18)";for(let yy=24;yy<r.height;yy+=34)for(let xx=(yy/34%2)*40-20;xx<r.width;xx+=110){x.save();x.translate(xx,yy);x.rotate(-.2);x.fillText("💞 SCRATCH",0,0);x.restore()}
+ x.font="800 26px Syne,Manrope,sans-serif";x.fillStyle="#1B1633";x.textAlign="center";x.fillText("Scratch to reveal 👆",r.width/2,r.height/2+8);
+ x.globalCompositeOperation="destination-out";let down=false,last=null,moves=0,fin=false;
+ const pos=e=>{const b=cv.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]};
+ const check=()=>{const d=x.getImageData(0,0,cv.width,cv.height).data;let clr=0,tot=0;for(let i=3;i<d.length;i+=4*48){tot++;if(d[i]<60)clr++}if(clr/tot>.48&&!fin){fin=true;cv.classList.add("gone");onDone()}};
+ cv.onpointerdown=e=>{down=true;last=pos(e);cv.setPointerCapture(e.pointerId);stroke(last,last)};
+ cv.onpointermove=e=>{if(!down)return;const p=pos(e);stroke(last,p);last=p;if(++moves%6===0)check();if(navigator.vibrate&&moves%10===0)navigator.vibrate(2)};
+ cv.onpointerup=cv.onpointercancel=()=>{down=false;check()};
+ function stroke(a,b){x.lineWidth=46;x.lineCap="round";x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke()}}
+// ---------- tracker ----------
+const VB=["😤","😕","🙂","🥰","😍"];
+function daysSince(){if(!S.start)return 0;return Math.floor((Date.now()-new Date(S.start+"T00:00:00+05:30"))/864e5)}
+let tick=null;
+function drawTrack(){clearInterval(tick);const t=$("trk");
+ if(!S.start){t.innerHTML=`<div class="box setup"><h3>Set up your Us. 💞</h3><div class="k">Takes 10 seconds. Stays on this phone.</div><div class="row2"><div><label for="n1">You</label><input id="n1" maxlength="14" value="${esc(S.names[0])}" placeholder="Your name"></div><div><label for="n2">Them</label><input id="n2" maxlength="14" value="${esc(S.names[1])}" placeholder="Their name"></div></div><label for="sd">Together since</label><input id="sd" type="date" max="${today()}"><button class="btn pink" id="go2" style="margin-top:16px">Start tracking</button></div>`;
+  $("go2").onclick=()=>{const d=$("sd").value;if(!d){$("sd").focus();$("sd").animate([{transform:"translateX(-6px)"},{transform:"translateX(6px)"},{transform:"none"}],300);return}S.names=[$("n1").value.trim()||"You",$("n2").value.trim()||"Bae"];S.start=d;save();if(window.confetti)confetti();drawTrack()};return}
+ const D=daysSince(),N=S.names,MS=[7,30,50,100,200,365,500,730,1000,1095,1500,1825,2000,2500,3000,3650].map(n=>[n,n===365?"1 year 🎂":n===730?"2 years 🎂":n===1095?"3 years 🎂":n===1825?"5 years 💍":n===3650?"10 years 👑":n+" days"]);
+ const nxt=MS.find(m=>m[0]>D)||[D+365,"Another year"],prv=[...MS].reverse().find(m=>m[0]<=D)||[0,""],pct=Math.round((D-prv[0])/(nxt[0]-prv[0])*100);
+ const nd=new Date(new Date(S.start+"T00:00:00+05:30").getTime()+nxt[0]*864e5).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+ const td=today(),vt=S.vibe[td];
+ t.innerHTML=`<div class="counter"><div class="hearts2">${[8,30,55,78].map((l,k)=>`<i style="left:${l}%;animation-delay:${k*2.1}s">💗</i>`).join("")}</div><div class="names">${esc(N[0])} <i>♥</i> ${esc(N[1])}</div><div class="days" id="dd">${D.toLocaleString("en-IN")}</div><div class="sub2">days together. Started ${new Date(S.start).toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"})}.</div><div class="us-clock" id="clk"></div></div>
+ <div class="grid2">
+ <div class="box"><h3>Next milestone</h3><div class="k">Set a reminder, don’t be that person.</div><div class="ms"><div class="ring" id="rg"><b>${nxt[0]-D}d</b></div><div><b style="font:800 22px var(--d)">${nxt[1]}</b><div style="color:var(--mute);font-weight:700">on ${nd}</div><div style="font-weight:800;margin-top:6px">${pct}% of the way</div></div></div>
+ <div class="ms-list">${MS.filter(m=>m[0]<=D+800).slice(-6).map(m=>`<div class="${m[0]<=D?"past":""}"><span>${m[1]}</span><span>${m[0]<=D?"✓ done":"in "+(m[0]-D)+"d"}</span></div>`).join("")}</div></div>
+ <div class="box"><h3>Daily vibe check</h3><div class="k">How are you two today? Tap once a day.</div><div class="vibes">${VB.map((v,k)=>`<button data-v="${k}" class="${vt===k?"on":""}" aria-label="Vibe ${k+1}">${v}</button>`).join("")}</div><svg class="ekg" id="ekg" viewBox="0 0 300 90" preserveAspectRatio="none"></svg><div class="k" id="vk" style="margin:6px 0 0"></div></div>
+ <div class="box"><h3>Memory jar 🫙</h3><div class="k">Drop a memory. Shake the jar on a bad day.</div><div class="jar-wrap"><div class="jar" id="jar" role="button" aria-label="Shake the memory jar"><svg viewBox="0 0 120 150"><rect x="30" y="4" width="60" height="16" rx="4" fill="#FF5FA2" stroke="#1B1633" stroke-width="3"/><path d="M26 22h68c6 0 10 4 10 10v100c0 8-6 14-14 14H30c-8 0-14-6-14-14V32c0-6 4-10 10-10z" fill="#E9F6FF" fill-opacity=".8" stroke="#1B1633" stroke-width="3"/>${S.jar.slice(-12).map((_,k)=>`<rect x="${26+(k*23)%62}" y="${128-Math.floor(k/3)*14}" width="20" height="12" rx="2" fill="${["#FFE27A","#FFB3D1","#9BE1F5","#CBBBFF"][k%4]}" stroke="#1B1633" stroke-width="1.5" transform="rotate(${(k*37)%30-15} ${36+(k*23)%62} ${134-Math.floor(k/3)*14})"/>`).join("")}<text x="60" y="80" text-anchor="middle" font-size="13" font-weight="800" fill="#1B1633" font-family="Manrope">${S.jar.length}</text></svg></div><div id="memo" class="memo">${S.jar.length?"Tap the jar to pull a memory 🫶":"Empty jar. Add your first memory below 👇"}</div></div>
+ <div class="jar-add"><input id="ji" maxlength="200" placeholder="That time we got lost in Lonavala…" aria-label="New memory"><button class="btn pink" id="ja">Drop</button></div></div>
+ </div><button class="btn" id="rs" style="width:auto;margin-top:20px;font-size:13px;padding:10px 14px">Edit names or date</button>`;
+ requestAnimationFrame(()=>$("rg").style.setProperty("--rp",pct));
+ const clk=()=>{const ms=Date.now()-new Date(S.start+"T00:00:00+05:30");const h=Math.floor(ms/36e5),m=Math.floor(ms/6e4)%60,s=Math.floor(ms/1e3)%60;$("clk")&&($("clk").innerHTML=[[Math.floor(D/7),"weeks"],[h,"hours"],[m,"min"],[s,"sec"]].map(a=>`<div><b>${a[0]}</b><small>${a[1]}</small></div>`).join(""))};clk();tick=setInterval(clk,1000);
+ drawEkg();
+ t.querySelectorAll(".vibes button").forEach(b=>b.onclick=()=>{S.vibe[td]=+b.dataset.v;save();t.querySelectorAll(".vibes button").forEach(x=>x.classList.toggle("on",x===b));b.animate([{transform:"scale(1.5) rotate(-10deg)"},{transform:"scale(1.12)"}],{duration:400,easing:"cubic-bezier(.3,1.8,.4,1)"});drawEkg()});
+ $("jar").onclick=()=>{const j=$("jar");j.classList.remove("shake");void j.offsetWidth;j.classList.add("shake");if(!S.jar.length)return;const m=S.jar[Math.floor(Math.random()*S.jar.length)];setTimeout(()=>{$("memo").innerHTML=`${esc(m.t)}<small>${new Date(m.d).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}</small>`;$("memo").style.animation="none";void $("memo").offsetWidth;$("memo").style.animation=""},450);if(navigator.vibrate)navigator.vibrate([15,30,15])};
+ $("ja").onclick=()=>{const v=$("ji").value.trim();if(!v)return;S.jar.push({t:v,d:Date.now()});save();drawTrack();setTimeout(()=>$("jar").click(),100)};
+ $("rs").onclick=()=>{S.start="";save();drawTrack()}}
+function drawEkg(){const days=[];for(let k=13;k>=0;k--){const d=new Date(Date.now()+19800000-k*864e5).toISOString().slice(0,10);days.push(S.vibe[d])}
+ const pts=days.map((v,k)=>[k*(300/13),v==null?null:80-v*17]);let p="",prev=null;pts.forEach(([x,y],k)=>{if(y==null)return;if(prev){const mx=(prev[0]+x)/2;p+=` L ${mx-4} ${prev[1]} L ${mx} ${Math.min(prev[1],y)-14} L ${mx+4} ${Math.max(prev[1],y)+8} L ${x} ${y}`}else p+=`M ${x} ${y}`;prev=[x,y]});
+ const logged=days.filter(v=>v!=null);$("ekg").innerHTML=(p?`<path d="${p}"/>`:"")+pts.filter(q=>q[1]!=null).map(q=>`<circle cx="${q[0]}" cy="${q[1]}" r="4"/>`).join("")+(logged.length?"":`<text x="150" y="50" text-anchor="middle" font-size="13" font-weight="700" fill="#5F5A78" font-family="Manrope">Your 14-day heartbeat shows up here</text>`);
+ const avg=logged.length?logged.reduce((a,b)=>a+b,0)/logged.length:null;$("vk").textContent=avg==null?"":`14-day vibe: ${VB[Math.round(avg)]} ${avg>=3?"you two are thriving":avg>=2?"steady and sweet":"rough patch? try a Talk stop on the path 💬"}`}
+// ---------- wrapped ----------
+function drawWrap(){const D=daysSince(),N=S.names,dn=S.done.length,v=Object.values(S.vibe),top=v.length?VB[[0,1,2,3,4].sort((a,b)=>v.filter(x=>x===b).length-v.filter(x=>x===a).length)[0]]:"—";
+ const types=S.done.map(i=>M[order(i)][0]),fav=types.length?Object.entries(types.reduce((a,t)=>(a[t]=(a[t]||0)+1,a),{})).sort((a,b)=>b[1]-a[1])[0][0]:null;
+ const title=dn>=30?"Endgame couple 👑":dn>=20?"Main character duo 🌟":dn>=10?"Certified cute 🦋":dn>=3?"Lowkey adorable 🥹":"Just getting started 🌱";
+ $("wrp").innerHTML=`<div class="wrapped" id="wcard"><div class="wk">CLUELESS · COUPLE WRAPPED ${new Date().getFullYear()}</div><h2>${esc(N[0]||"You")} &amp; ${esc(N[1]||"Bae")}</h2><div class="st"><div><b>${D?D.toLocaleString("en-IN"):"?"}</b><small>days together</small></div><div><b>${dn}/30</b><small>path stops done</small></div><div><b>${S.jar.length}</b><small>memories in the jar</small></div><div><b>${top}</b><small>your most common vibe</small></div></div>${fav?`<div style="margin-top:12px;font-weight:700">Your thing: <b>${TY[fav][0]} ${TY[fav][1]}s</b></div>`:""}<div class="title"><small>YOUR COUPLE TYPE</small><b>${title}</b></div><div class="brand">clueless-games.pages.dev/us</div></div>
+ <div class="wr-acts"><button class="btn pink" id="sh">Share our Wrapped 💞</button><p class="privacy" style="margin:0">Tip: screenshot the card and post it on your story.</p></div>${!S.start?`<p class="privacy">Add your start date in the “Us” tab to fill in your days.</p>`:""}`;
+ $("sh").onclick=()=>{const t=`${N[0]||"Me"} & ${N[1]||"Bae"}: ${D} days together, ${dn}/30 path stops, couple type “${title}” 💞 Make yours: ${location.origin}/us.html`;if(navigator.share)navigator.share({text:t}).catch(()=>{});else copyText(t).then(ok=>$("sh").textContent=ok?"Copied! Paste it anywhere":"Copy failed")}}
+drawPath();addEventListener("resize",()=>{clearTimeout(drawPath.rt);drawPath.rt=setTimeout(drawPath,200)});
+</script><script src="howto.js"></script></body></html>
